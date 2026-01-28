@@ -23,11 +23,11 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    if (password.length < 6) {
+    if (password.length < 8) {
       return NextResponse.json(
         {
           success: false,
-          message: "Password contain atleast 6 characters.",
+          message: "Password contain atleast 8 characters.",
         },
         { status: 400 }
       );
