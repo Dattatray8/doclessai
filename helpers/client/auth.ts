@@ -1,5 +1,5 @@
 import { AppDispatch } from "@/redux/store";
-import { setAuthLoad } from "@/redux/userSlice";
+import { setAuthLoad, setUserData } from "@/redux/userSlice";
 import { IUserLogin, IUserRegister } from "@/types/auth.types";
 import axios from "axios";
 import { signIn } from "next-auth/react";
@@ -25,6 +25,7 @@ export const handleSignUp = async ({
     });
     console.log(res.data);
     toast.success(res?.data?.message);
+    dispatch(setUserData(res?.data?.user));
   } catch (error: any) {
     toast.error(error?.response?.data?.message || error?.message);
     dispatch(setAuthLoad(false));
@@ -67,9 +68,10 @@ export const handleLogin = async ({
 };
 
 export const handleGoogleAuth = async () => {
-  await signIn("google", { callbackUrl: "/" });
+  const res = await signIn("google", { callbackUrl: "/user" });
+  console.log(res)
 };
 
 export const handlGithubAuth = async () => {
-  await signIn("github", { callbackUrl: "/" });
+  await signIn("github", { callbackUrl: "/user" });
 };
