@@ -7,6 +7,12 @@ export interface user {
       image: string;
       [prop: string]: any;
     };
+    authUser: {
+      username: string;
+      email: string;
+      image: string;
+      id: string
+    };
     theme: Theme;
   };
 }

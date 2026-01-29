@@ -1,20 +1,21 @@
 'use client'
 
 import { user } from "@/types/redux.types";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 
 export default function User() {
     const router = useRouter();
-    const data = useSelector((state: user) => state.user)
-    const session = useSession();
+    const authUser = useSelector((state: user) => state.user.authUser)
+    const userData = useSelector((state: user) => state.user.userData)
+
+    const userId = userData?._id || authUser?.id;
     useEffect(() => {
-        if (data.userData?.id || session?.data?.user) {
-            router.replace(`/user/${session.data?.user.id}`)
+        if (userId) {
+            router.replace(`/user/${userId}`)
         } else {
             router.replace('/login')
         }
-    }, [data.userData, session, router])
+    }, [userId, router])
 }

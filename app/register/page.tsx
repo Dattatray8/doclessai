@@ -25,7 +25,7 @@ export default function Register() {
     console.log(formValue)
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center sm:mt-20">
             <div className="card w-96 bg-base-100 shadow-md">
                 <div className="card-body">
                     <div className="flex flex-col gap-2 items-center">

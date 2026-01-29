@@ -5,8 +5,9 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     authLoad: false,
-    userData: [],
+    userData: null,
     theme: "light" as Theme,
+    authUser: null,
   },
   reducers: {
     setAuthLoad: (state, action: PayloadAction<boolean>) => {
@@ -18,9 +19,13 @@ const userSlice = createSlice({
     setTheme: (state, action: PayloadAction<Theme>) => {
       state.theme = action.payload;
     },
+    setAuthUser: (state, action) => {
+      state.authUser = action.payload;
+    },
   },
 });
 
-export const { setAuthLoad, setUserData, setTheme } = userSlice.actions;
+export const { setAuthLoad, setUserData, setTheme, setAuthUser } =
+  userSlice.actions;
 
 export default userSlice.reducer;

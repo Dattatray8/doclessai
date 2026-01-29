@@ -1,7 +1,8 @@
 import { AppDispatch } from "@/redux/store";
-import { setUserData } from "@/redux/userSlice";
+import { setAuthUser, setUserData } from "@/redux/userSlice";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { signOut } from "next-auth/react";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export const getUser = async (dispatch: AppDispatch) => {
   try {
@@ -9,6 +10,19 @@ export const getUser = async (dispatch: AppDispatch) => {
     dispatch(setUserData(res?.data.user));
   } catch (error: any) {
     console.log(error);
-    toast.error(error?.response?.data?.message || error?.message);
+  }
+};
+
+export const handleSignOut = async (
+  router: AppRouterInstance,
+  dispatch: AppDispatch,
+) => {
+  try {
+    await signOut({ redirect: false });
+    dispatch(setUserData(null));
+    dispatch(setAuthUser(null));
+    router.replace("/");
+  } catch (error) {
+    console.log(error);
   }
 };
