@@ -29,7 +29,7 @@ export default function Register() {
             <div className="card w-96 bg-base-100 shadow-md">
                 <div className="card-body">
                     <div className="flex flex-col gap-2 items-center">
-                        <div className={`${appNameFont.className} text-4xl`}>AppPilot</div>
+                        <div className={`${appNameFont.className} text-4xl`}>DoclessAI</div>
                         <p>Create your account to get started</p>
                     </div>
                     <div className="flex flex-col gap-4 text-center mt-6">

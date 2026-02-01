@@ -1,6 +1,6 @@
 'use client'
 
-import { handleGoogleAuth, handleLogin, handleSignUp, handlGithubAuth } from "@/helpers/client/auth"
+import { handleGoogleAuth, handleLogin, handlGithubAuth } from "@/helpers/client/auth"
 import { IUserLogin } from "@/types/auth.types"
 import { user } from "@/types/redux.types"
 import { Archivo_Black } from "next/font/google"
@@ -28,7 +28,7 @@ export default function Login() {
             <div className="card w-96 bg-base-100 shadow-md">
                 <div className="card-body">
                     <div className="flex flex-col gap-2 items-center">
-                        <div className={`${appNameFont.className} text-4xl`}>AppPilot</div>
+                        <div className={`${appNameFont.className} text-4xl`}>DoclessAI</div>
                         <p>Login to get started</p>
                     </div>
                     <div className="flex flex-col gap-4 text-center mt-6">
@@ -89,7 +89,7 @@ export default function Login() {
                             <span className="loading loading-spinner text-neutral"></span>
                         ) : "Login"}</button>
                         <div>
-                            Don't Have an account? <span className="link" onClick={() => router.push('/register')}>Sign Up</span>
+                            Don&apost Have an account? <span className="link" onClick={() => router.push('/register')}>Sign Up</span>
                         </div>
                     </div>
                     <span className="divider">OR</span>
