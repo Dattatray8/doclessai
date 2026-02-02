@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@qdrant/js-client-rest": "^1.16.2",
     "@reduxjs/toolkit": "^2.11.2",
     "axios": "^1.13.3",
     "bcryptjs": "^3.0.3",
