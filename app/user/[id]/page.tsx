@@ -43,7 +43,7 @@ export default function Profile() {
             if (backendImage) {
                 formData.append("file", backendImage!);
             }
-            const res = await axios.post('/api/v1/edit', formData, { withCredentials: true })
+            const res = await axios.put('/api/v1/user', formData, { withCredentials: true })
             dispatch(setUserData(res?.data.user))
             toast.success(res?.data.message)
             setEdit(false);
