@@ -8,7 +8,7 @@ interface IApp {
     geminiKey: string;
     appKey?: string;
     description: string;
-    features: mongoose.Types.ObjectId[];
+    features?: mongoose.Types.ObjectId[];
     createdAt?: Date;
     updatedAt?: Date;
 }

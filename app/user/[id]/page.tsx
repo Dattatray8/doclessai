@@ -18,7 +18,7 @@ export default function Profile() {
     const imageRef = useRef<HTMLInputElement>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const dispatch = useDispatch();
-    let Icon = edit ? X : Pencil
+    const Icon = edit ? X : Pencil
     useEffect(() => {
         if (data?.userData) {
             setUserName(data?.userData?.username as string);
@@ -27,7 +27,7 @@ export default function Profile() {
     }, [data?.userData])
 
     const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let files = e.target.files
+        const files = e.target.files
         if (!files || files.length === 0) {
             return
         }
