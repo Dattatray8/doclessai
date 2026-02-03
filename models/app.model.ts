@@ -5,7 +5,11 @@ interface IApp {
     owner: mongoose.Types.ObjectId;
     name: string;
     contactEmail: string;
-    geminiKey: string;
+    geminiKey: {
+        iv: string,
+        content: string,
+        tag: string,
+    };
     appKey?: string;
     description: string;
     features?: mongoose.Types.ObjectId[];
@@ -28,7 +32,9 @@ const appSchema = new mongoose.Schema<IApp>({
         required: true,
     },
     geminiKey: {
-        type: String,
+        iv: {type: String, required: true},
+        content: {type: String, required: true},
+        tag: {type: String, required: true},
         required: true,
         select: false,
     },
