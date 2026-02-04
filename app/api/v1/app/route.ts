@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
                 const encryptedGeminiKey = encrypt(geminiKey);
                 sendStatus("🔑 Generating secure App Key...");
                 const secureAppKey = generateAppKey();
-                const hashSecureAppKey = await hashAppKey(secureAppKey);
+                const hashSecureAppKey = hashAppKey(secureAppKey);
                 sendStatus("🗄️ Creating Your Application...");
                 const app = await App.create({
                     owner,

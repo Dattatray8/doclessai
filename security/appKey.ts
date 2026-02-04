@@ -6,10 +6,11 @@ export function generateAppKey(): string {
     return `doclessai_live_${random}`;
 }
 
-export async function hashAppKey(appKey: string): Promise<string> {
-    return await bcrypt.hash(appKey, 12);
-}
+const HASH_SECRET = process.env.APP_KEY_SECRET || 'fallback-secret-for-dev-only';
 
-export async function verifyAppKey(appKey: string, appSecret: string): Promise<boolean> {
-    return await bcrypt.compare(appKey, appSecret);
+export function hashAppKey(appKey: string): string {
+    return crypto
+        .createHmac('sha256', HASH_SECRET)
+        .update(appKey)
+        .digest('hex');
 }
