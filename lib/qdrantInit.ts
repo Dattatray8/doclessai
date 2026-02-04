@@ -1,10 +1,5 @@
-import { ensureQdrantCollection } from "@/lib/qdrantSetup";
-
-let qdrantReady:boolean = false;
+import {ensureQdrantCollection} from "@/lib/qdrantSetup";
 
 export async function ensureQdrantReady() {
-    if (qdrantReady) return;
-
     await ensureQdrantCollection();
-    qdrantReady = true;
 }

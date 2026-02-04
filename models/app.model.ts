@@ -32,11 +32,12 @@ const appSchema = new mongoose.Schema<IApp>({
         required: true,
     },
     geminiKey: {
-        iv: {type: String, required: true},
-        content: {type: String, required: true},
-        tag: {type: String, required: true},
-        required: true,
-        select: false,
+        type: {
+            iv: {type: String, required: true},
+            content: {type: String, required: true},
+            tag: {type: String, required: true}
+        },
+        select: false
     },
     description: {
         type: String,
