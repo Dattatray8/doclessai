@@ -11,7 +11,7 @@ export const generateReponse = async (app, geminiKey, query: string, features) =
 
                     # App Profile
                     - Name: ${app.name}
-                    - Email: ${app.email}
+                    - Email: ${app.contactEmail}
                     - About: ${app.description}
 
                     # Context Data (Features/Docs)
@@ -24,7 +24,7 @@ export const generateReponse = async (app, geminiKey, query: string, features) =
                     1. **Comprehensive but Concise**: Do not give one-sentence answers. Explain the "How" and "Why" based on the data.
                     2. **Step-by-Step**: If the user asks how to do something, provide a clear, numbered list of steps found in the context.
                     3. **Friendly Tone**: Use a supportive and proactive tone.
-                    4. **No Hallucinations**: If the info isn't in the context, say: "I'm sorry, I don't have information on that specific feature yet. You can reach our team at ${app.email} for more help."
+                    4. **No Hallucinations**: If the info isn't in the context, say: "I'm sorry, I don't have information on that specific feature yet. You can reach our team at ${app.contactEmail} for more help."
 
                     User Query: ${query}
 

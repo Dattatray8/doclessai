@@ -6,9 +6,11 @@ import Feature from "@/models/feature.model";
 import {decrypt} from "@/security/encryption";
 import {hashAppKey} from "@/security/appKey";
 import {generateReponse} from "@/helpers/server/gemini";
+import connectDB from "@/lib/db";
 
 export async function POST(request: NextRequest) {
     try {
+        await connectDB();
         const {appKey, query} = await request.json();
         if (!appKey) {
             return NextResponse.json({
@@ -28,7 +30,7 @@ export async function POST(request: NextRequest) {
             }, {status: 404});
         }
         const emb = await generateEmbeddings(query);
-        const result = await searchSimilarFeatures(emb);
+        const result = await searchSimilarFeatures(emb, app._id.toString());
         const featureIds = [];
         for (const r of result) {
             featureIds.push(r?.payload.mongoFeatureId)
