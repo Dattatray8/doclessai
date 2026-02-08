@@ -5,13 +5,25 @@ import {searchSimilarFeatures} from "@/lib/qdrantSearch";
 import Feature from "@/models/feature.model";
 import {decrypt} from "@/security/encryption";
 import {hashAppKey} from "@/security/appKey";
-import {generateReponse} from "@/helpers/server/gemini";
+import {generateResponse} from "@/helpers/server/gemini";
 import connectDB from "@/lib/db";
 
 export async function POST(request: NextRequest) {
     try {
         await connectDB();
-        const {appKey, query} = await request.json();
+        const contentType = request.headers.get("content-type") || "";
+        let appKey, query, imageFile;
+        if (contentType.includes("multipart/form-data")) {
+            const formData = await request.formData();
+            appKey = formData.get("appKey") as string | null;
+            query = formData.get("query") as string;
+            imageFile = formData.get("image") as File | null;
+        } else {
+            const body = await request.json();
+            appKey = body.appKey;
+            query = body.query;
+            imageFile = null;
+        }
         if (!appKey) {
             return NextResponse.json({
                 success: false, message: "app key missing"
@@ -24,16 +36,17 @@ export async function POST(request: NextRequest) {
                 success: false, message: "App not found"
             }, {status: 404});
         }
-        if (!query) {
-            return NextResponse.json({
-                success: false, message: "Query key missing"
-            }, {status: 404});
+        if (!query && !imageFile) {
+            return NextResponse.json(
+                {success: false, message: "Either query or image is required"},
+                {status: 400}
+            );
         }
         const emb = await generateEmbeddings(query);
-        const result = await searchSimilarFeatures(emb, app._id.toString());
+        const result = await searchSimilarFeatures(emb!, app._id.toString());
         const featureIds = [];
         for (const r of result) {
-            featureIds.push(r?.payload.mongoFeatureId)
+            featureIds.push(r?.payload!.mongoFeatureId)
         }
         const features = [];
         for (const fId of featureIds) {
@@ -41,8 +54,12 @@ export async function POST(request: NextRequest) {
             features.push(feature);
         }
         const geminiKey = decrypt(app.geminiKey);
-        const res = await generateReponse(app, geminiKey, query, features);
-        return NextResponse.json(res);
+        const res = await generateResponse(app, geminiKey, query, features, imageFile!);
+        const sources = [];
+        for (const f of features) {
+            sources.push(f.image)
+        }
+        return NextResponse.json({...res, sources});
     } catch (error) {
         console.error(error);
         return NextResponse.json(

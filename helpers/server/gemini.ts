@@ -1,41 +1,122 @@
-import {GoogleGenAI} from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
-export const generateReponse = async (app, geminiKey, query: string, features) => {
-    const genAi = new GoogleGenAI(geminiKey);
+async function fileToBase64(file: File) {
+    const buffer = Buffer.from(await file.arrayBuffer());
+    return buffer.toString("base64");
+}
+
+export const generateResponse = async (
+    app,
+    geminiKey: string,
+    query: string,
+    features,
+    imageFile: File | null
+) => {
+    const genAi = new GoogleGenAI({ apiKey: geminiKey });
+    const parts: any[] = [];
+
+    // Take only 2 feature images for speed + grounding
+    const featureImages = features
+        .map(f => f.image)
+        .filter(Boolean)
+        .slice(0, 2);
+
+    parts.push({
+        text: `
+# Role
+You are the Intelligent Support Agent for ${app.name}. 
+Your goal is to assist users by analyzing documentation and visual data to provide accurate, helpful guidance.
+
+# Application Profile
+- Name: ${app.name}
+- Contact Email: ${app.contactEmail}
+- Description: ${app.description}
+
+# Context Data (Features / Docs)
+${features.map(f => `
+FEATURE:
+Name: ${f.name}
+Description: ${f.description}
+Route: ${f.route}
+ElementId: ${f.elementId}
+Image: ${f.image}
+`).join("\n")}
+
+# User Input
+User Query: ${query || "User sent an image without text."}
+
+# Multimodal Reasoning Rules
+
+1) If a user image is provided:
+   - Treat it as a screenshot or real-world image.
+   - Understand what the image shows.
+   - Compare it with the provided feature reference images.
+   - Identify the most relevant feature.
+   - Select ONE best-matching image URL from the context.
+   - Use that image URL in the JSON response.
+
+2) If NO user image is provided:
+   - Use text + context data only.
+   - Do NOT guess images.
+   - Set "image": null unless the query clearly maps to a feature image.
+
+3) Image selection rules:
+   - Only return image URLs that exist in the provided context.
+   - Never invent image URLs.
+   - If confidence is low → return "image": null.
+
+4) Data grounding:
+   - Use ONLY provided context.
+   - No assumptions.
+   - No hallucinations.
+   - No external knowledge.
+
+5) Answering style:
+   - Clear
+   - Professional
+   - Helpful
+   - Structured
+   - Practical
+   - Human-readable
+   - No marketing language
+
+6) If information is missing in context:
+   Respond with:
+   "I don’t have enough information about this in the current system data. Please contact ${app.contactEmail} for further support."
+
+# Output Format (JSON ONLY)
+{
+  "res": "Clear, structured, helpful and detailed response",
+  "image": "URL from context or null",
+  "elementId": "ID from context or null",
+  "route": "route from context or null"
+}
+`
+    });
+
+    if (imageFile) {
+        const base64 = await fileToBase64(imageFile);
+
+        parts.push({
+            inlineData: {
+                mimeType: imageFile.type,
+                data: base64,
+            },
+        });
+    }
+
+    for (const url of featureImages) {
+        parts.push({
+            image_url: url
+        });
+    }
+
     const res = await genAi.models.generateContent({
         model: "gemini-3-flash-preview",
-        contents: `
-        # Identity
-                    You are the expert, friendly AI assistant for ${app.name}. 
-                    You replace a boring FAQ with a warm, detailed, and intelligent conversation.
-
-                    # App Profile
-                    - Name: ${app.name}
-                    - Email: ${app.contactEmail}
-                    - About: ${app.description}
-
-                    # Context Data (Features/Docs)
-                    ${features}
-
-                    # Goal
-                    Answer the user's question using ONLY the Context Data.
-                    
-                    # Detailed Response Rules:
-                    1. **Comprehensive but Concise**: Do not give one-sentence answers. Explain the "How" and "Why" based on the data.
-                    2. **Step-by-Step**: If the user asks how to do something, provide a clear, numbered list of steps found in the context.
-                    3. **Friendly Tone**: Use a supportive and proactive tone.
-                    4. **No Hallucinations**: If the info isn't in the context, say: "I'm sorry, I don't have information on that specific feature yet. You can reach our team at ${app.contactEmail} for more help."
-
-                    User Query: ${query}
-
-                    # Required JSON Output:
-                    {
-                        "res": "A thorough, helpful, and conversational response (3-5 sentences minimum if data allows).",
-                        "image": "URL from context or null",
-                        "elementId": "ID from context or null",
-                        "route": "route from context or null"
-                    }
-        `
+        contents: [{ role: "user", parts }]
     });
-    return JSON.parse(res.text.replace(/```json/g, "").replace(/```/g, "").trim());
-}
+
+    return JSON.parse(
+        res.text!.replace(/```json/g, "").replace(/```/g, "").trim()
+    );
+};
