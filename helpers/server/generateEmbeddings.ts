@@ -1,17 +1,19 @@
-import {GoogleGenerativeAI} from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
 if (!process.env.GEMINI_API_KEY) {
     throw new Error("Missing GEMINI_API_KEY");
 }
 
-const genAi = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-
-const embmodel = genAi.getGenerativeModel({
-    model: "text-embedding-004",
-});
+const ai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY});
 
 export const generateEmbeddings = async (text: string) => {
-    const res = await embmodel.embedContent(text.trim().replace(/\s+/g, " "));
-    return res.embedding.values;
+    const response = await ai.models.embedContent({
+        model: 'gemini-embedding-001',
+        contents: text.trim().replace(/\s+/g, " "),
+        config: {
+            outputDimensionality: 768,
+            taskType: 'RETRIEVAL_QUERY' // Added for better RAG accuracy
+        },
+    });
+    return response.embeddings![0].values;
 };
-
