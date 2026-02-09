@@ -119,7 +119,7 @@ User Query: ${query || "User sent an image without text."}
     for (const url of featureImages) {
         parts.push({
             fileData: {
-                mimeType: "image/*",
+                mimeType: "image/png",
                 fileUri: url
             }
         });

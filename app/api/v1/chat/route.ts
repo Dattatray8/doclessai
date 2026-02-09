@@ -11,6 +11,7 @@ import connectDB from "@/lib/db";
 export async function POST(request: NextRequest) {
     try {
         await connectDB();
+        console.log("hi")
         const contentType = request.headers.get("content-type") || "";
         let appKey, query, imageFile;
         if (contentType.includes("multipart/form-data")) {
