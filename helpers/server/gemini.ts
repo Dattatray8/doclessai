@@ -112,19 +112,17 @@ User Query: ${query || "User sent an image without text."}
             },
         });
     }
-    if (imageFile) {
-        const featureImages = features
-            .map(f => f.image)
-            .filter(Boolean)
-            .slice(0, 2);
-        for (const url of featureImages) {
-            parts.push({
-                fileData: {
-                    mimeType: "image/*",
-                    fileUri: url
-                }
-            });
-        }
+    const featureImages = features
+        .map(f => f.image)
+        .filter(Boolean)
+        .slice(0, 2);
+    for (const url of featureImages) {
+        parts.push({
+            fileData: {
+                mimeType: "image/*",
+                fileUri: url
+            }
+        });
     }
     const res = await genAi.models.generateContent({
         model: "gemini-3-flash-preview",

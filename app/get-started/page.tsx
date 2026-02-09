@@ -70,7 +70,7 @@ export default function GetStartedPage() {
                                     className="text-white"><code>import {"{ ChatWidget }"} from &quot;@doclessai/sdk&quot;;</code></pre>
                                 <pre className="text-white"><code> </code></pre>
                                 <pre
-                                    className="text-white"><code>&lt;ChatWidget appKey=&quot;YOUR_KEY&quot; /&gt;</code></pre>
+                                    className="text-white"><code>&lt;ChatWidget appKey=&quot;YOUR_KEY&quot; name=&quot;YOUR_ASSISTANT_NAME&quot; /&gt;</code></pre>
                             </div>
                         </div>
                     </div>
