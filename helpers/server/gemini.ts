@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import {GoogleGenAI} from "@google/genai";
 
 async function fileToBase64(file: File) {
     const buffer = Buffer.from(await file.arrayBuffer());
@@ -12,14 +12,8 @@ export const generateResponse = async (
     features,
     imageFile: File | null
 ) => {
-    const genAi = new GoogleGenAI({ apiKey: geminiKey });
-    const parts: any[] = [];
-
-    // Take only 2 feature images for speed + grounding
-    const featureImages = features
-        .map(f => f.image)
-        .filter(Boolean)
-        .slice(0, 2);
+    const genAi = new GoogleGenAI({apiKey: geminiKey});
+    const parts = [];
 
     parts.push({
         text: `
@@ -104,16 +98,24 @@ User Query: ${query || "User sent an image without text."}
             },
         });
     }
-
-    for (const url of featureImages) {
-        parts.push({
-            image_url: url
-        });
+    if (imageFile) {
+        const featureImages = features
+            .map(f => f.image)
+            .filter(Boolean)
+            .slice(0, 2);
+        for (const url of featureImages) {
+            parts.push({
+                fileData: {
+                    mimeType: url.type,
+                    fileUri: url
+                }
+            });
+        }
     }
-
+    console.log(parts);
     const res = await genAi.models.generateContent({
         model: "gemini-3-flash-preview",
-        contents: [{ role: "user", parts }]
+        contents: [{role: "user", parts}]
     });
 
     return JSON.parse(
