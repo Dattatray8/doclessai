@@ -1,5 +1,6 @@
 'use client'
 import React from 'react';
+import Link from "next/link";
 
 const NotFound: React.FC = () => {
     return (
@@ -15,7 +16,7 @@ const NotFound: React.FC = () => {
                 <div className="space-y-2">
                     <h2 className="text-3xl font-bold text-base-content">Page Not Found</h2>
                     <p className="text-base-content/70 max-w-md mx-auto">
-                        The page you're looking for doesn't exist or has been moved.
+                        The page you&apos;re looking for doesn&apos;t exist or has been moved.
                     </p>
                 </div>
 
@@ -23,9 +24,9 @@ const NotFound: React.FC = () => {
                     <button className="btn btn-primary" onClick={() => window.history.back()}>
                         Go Back
                     </button>
-                    <a href="/" className="btn btn-ghost">
+                    <Link href="/" className="btn btn-ghost">
                         Home
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

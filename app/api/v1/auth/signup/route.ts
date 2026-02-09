@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    let hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       username,
       email,

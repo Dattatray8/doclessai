@@ -112,7 +112,6 @@ User Query: ${query || "User sent an image without text."}
             });
         }
     }
-    console.log(parts);
     const res = await genAi.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: [{role: "user", parts}]

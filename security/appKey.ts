@@ -1,5 +1,4 @@
 import crypto from "crypto";
-import bcrypt from "bcryptjs";
 
 export function generateAppKey(): string {
     const random = crypto.randomBytes(32).toString("hex");

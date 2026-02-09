@@ -15,17 +15,17 @@ const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        let email = credentials?.email;
-        let password = credentials?.password;
+        const email = credentials?.email;
+        const password = credentials?.password;
         if (!email || !password) {
           throw new Error("email or password not found");
         }
         await connectDB();
-        let existUser = await User.findOne({ email });
+        const existUser = await User.findOne({ email });
         if (!existUser) {
           throw new Error("User not found");
         }
-        let isMatchPassword = await bcrypt.compare(
+        const isMatchPassword = await bcrypt.compare(
           password,
           existUser.password,
         );

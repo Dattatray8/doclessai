@@ -12,7 +12,7 @@ export const handleSignUp = async ({
   formValue: IUserRegister;
   dispatch: AppDispatch;
 }) => {
-  for (let key in formValue) {
+  for (const key in formValue) {
     if (formValue[key as keyof IUserRegister] === "") {
       toast.error(`${key} is empty`);
       return;
@@ -41,7 +41,7 @@ export const handleLogin = async ({
   formValue: IUserLogin;
   dispatch: AppDispatch;
 }) => {
-  for (let key in formValue) {
+  for (const key in formValue) {
     if (formValue[key as keyof IUserLogin] === "") {
       toast.error(`${key} is empty`);
       return;
