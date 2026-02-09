@@ -5,11 +5,25 @@ async function fileToBase64(file: File) {
     return buffer.toString("base64");
 }
 
+interface Feature {
+    name: string;
+    description: string;
+    route: string;
+    image: string;
+    elementId: string;
+}
+
+interface AppProfile {
+    name: string;
+    contactEmail: string;
+    description: string;
+}
+
 export const generateResponse = async (
-    app,
+    app: AppProfile,
     geminiKey: string,
     query: string,
-    features,
+    features: Feature[],
     imageFile: File | null
 ) => {
     const genAi = new GoogleGenAI({apiKey: geminiKey});
@@ -106,7 +120,7 @@ User Query: ${query || "User sent an image without text."}
         for (const url of featureImages) {
             parts.push({
                 fileData: {
-                    mimeType: url.type,
+                    mimeType: "image/*",
                     fileUri: url
                 }
             });

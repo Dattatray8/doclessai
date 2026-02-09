@@ -64,11 +64,13 @@ export default function GetStartedPage() {
                                 previews, and auto-scrolling.</p>
 
                             <div className="mockup-code bg-neutral text-white text-xs md:text-sm">
-                                <pre className="text-success italic"><code>// Just import and drop it in</code></pre>
                                 <pre
-                                    className="text-white"><code>import {"{ ChatWidget }"} from "@doclessai/sdk";</code></pre>
+                                    className="text-success italic"><code>{"// Just import and drop it in"}</code></pre>
+                                <pre
+                                    className="text-white"><code>import {"{ ChatWidget }"} from &quot;@doclessai/sdk&quot;;</code></pre>
                                 <pre className="text-white"><code> </code></pre>
-                                <pre className="text-white"><code>&lt;ChatWidget appKey="YOUR_KEY" /&gt;</code></pre>
+                                <pre
+                                    className="text-white"><code>&lt;ChatWidget appKey=&quot;YOUR_KEY&quot; /&gt;</code></pre>
                             </div>
                         </div>
                     </div>
@@ -81,12 +83,12 @@ export default function GetStartedPage() {
 
                             <div className="mockup-code bg-neutral text-white text-xs md:text-sm">
                                 <pre
-                                    className="text-secondary italic"><code>// Use the client logic directly</code></pre>
+                                    className="text-secondary italic"><code>{"// Use the client logic directly"}</code></pre>
                                 <pre
-                                    className="text-white"><code>import {"{ DoclessClient }"} from "@doclessai/sdk";</code></pre>
+                                    className="text-white"><code>import {"{ DoclessClient }"} from &quot;@doclessai/sdk&quot;;</code></pre>
                                 <pre className="text-white"><code> </code></pre>
                                 <pre className="text-white"><code>const ai = new DoclessClient({"{"} </code></pre>
-                                <pre className="text-white"><code>  appKey: "YOUR_KEY" </code></pre>
+                                <pre className="text-white"><code>  appKey: &quot;YOUR_KEY&quot; </code></pre>
                                 <pre className="text-white"><code>{"}"});</code></pre>
                                 <pre className="text-white"><code> </code></pre>
                                 <pre className="text-white"><code>await ai.ask(userQuery, imageFile);</code></pre>
