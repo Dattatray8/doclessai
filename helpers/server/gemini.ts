@@ -79,6 +79,8 @@ User Query: ${query || "User sent an image without text."}
    - No assumptions.
    - No hallucinations.
    - No external knowledge.
+   - if user haven't shared any screenshot or image file to you do not write in answer that based on your shared images.
+   - if you have 2 images reference so that is for context or reference if you have 3rd image then user shared an image.
 
 5) Answering style:
    - Clear
