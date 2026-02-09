@@ -69,7 +69,8 @@ User Query: ${query || "User sent an image without text."}
    - Set "image": null unless the query clearly maps to a feature image.
 
 3) Image selection rules:
-   - Only return image URLs that exist in the provided context.
+   - Only return image URLs that exist in the provided context, but if user asked for images then only return image url otherwise no need you can do it as null
+      if asked then only return.
    - Never invent image URLs.
    - If confidence is low → return "image": null.
 
