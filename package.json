@@ -19,6 +19,8 @@
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.9.0",
     "daisyui": "^5.5.14",
+    "framer-motion": "^12.34.1",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.563.0",
     "mongoose": "^9.1.5",
     "next": "16.1.5",
@@ -27,6 +29,7 @@
     "react-dom": "19.2.3",
     "react-hot-toast": "^2.6.0",
     "react-redux": "^9.2.0",
+    "tsparticles": "^3.9.1",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
