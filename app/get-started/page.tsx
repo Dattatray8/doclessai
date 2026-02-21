@@ -1,10 +1,15 @@
 import {Archivo_Black} from "next/font/google";
 import Link from "next/link";
+import type {Metadata} from "next";
 
 const font = Archivo_Black({
     subsets: ['latin'],
     weight: ['400']
 })
+
+export const metadata: Metadata = {
+    title: "Get Started With DoclessAI",
+};
 
 export default function GetStartedPage() {
     return (
@@ -16,12 +21,12 @@ export default function GetStartedPage() {
                             Ready to build?
                         </h1>
                         <p className="py-6 text-lg md:text-xl opacity-80">
-                            Connect your application to DoclessAI in seconds. Use our pre-built widget or the headless
-                            SDK for total control.
+                            Connect your application to DoclessAI in seconds.
+                            Add a context-aware AI assistant using our drop-in widget or headless SDK.
                         </p>
                         <Link href="/user"
                               className="btn btn-primary btn-md md:btn-lg shadow-lg hover:scale-105 transition-transform">
-                            Get Your App Key
+                            Create Assistant
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none"
                                  viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
@@ -31,6 +36,10 @@ export default function GetStartedPage() {
                     </div>
                 </div>
             </div>
+
+            <p className="text-sm opacity-60 mt-2">
+                Works with React, Next.js, and modern JavaScript frameworks.
+            </p>
 
             <section className="flex flex-col gap-4">
                 <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-4">
@@ -60,8 +69,7 @@ export default function GetStartedPage() {
                         </div>
                         <div className="card-body p-6">
                             <h3 className="card-title text-2xl mb-2">Drop-in Widget</h3>
-                            <p className="text-sm opacity-70 mb-4">The fastest way to add AI. Handles UI, image
-                                previews, and auto-scrolling.</p>
+                            <p className="text-sm opacity-70 mb-4">The fastest way to add AI. Handles UI, markdown formatting, image previews, auto-scrolling, and feature navigation.</p>
 
                             <div className="mockup-code bg-neutral text-white text-xs md:text-sm">
                                 <pre
@@ -91,13 +99,37 @@ export default function GetStartedPage() {
                                 <pre className="text-white"><code>  appKey: &quot;YOUR_KEY&quot; </code></pre>
                                 <pre className="text-white"><code>{"}"});</code></pre>
                                 <pre className="text-white"><code> </code></pre>
-                                <pre className="text-white"><code>await ai.ask(userQuery, imageFile);</code></pre>
+                                <pre className="italic"><code>{"// Send only query"}</code></pre>
+                                <pre className="text-white"><code>const res = await ai.ask(userQuery);</code></pre>
+                                <pre className="italic"><code>{"// Send query with user Image"}</code></pre>
+                                <pre className="text-white"><code>const res = await ai.ask(userQuery, ImageFile);</code></pre>
+                                <br />
+                                <pre className="italic"><code>{"// Response format"}</code></pre>
+                                <pre className="text-white"><code>{"{"}</code></pre>
+                                <pre className="text-white"><code>{"    res: string,          // AI response"}</code></pre>
+                                <pre className="text-white"><code>{"    image: string|null,   // image URL if relevant"}</code></pre>
+                                <pre className="text-white"><code>{"    route: string|null,   // app route for navigation"}</code></pre>
+                                <pre className="text-white"><code>{"    elementId: string|null // UI element to highlight"}</code></pre>
+                                <pre className="text-white"><code>{"}"}</code></pre>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
+
+            <section className="flex flex-col gap-3">
+                <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-4">
+                    <span className="bg-primary text-primary-content w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full text-base">3</span>
+                    🎉 You&apos;re Live
+                </h2>
+                <p className="opacity-70">
+                    Your assistant is ready to guide users, answer questions, and navigate features inside your app.
+                </p>
+            </section>
+
+            <p className="text-center opacity-60 text-sm mt-6">
+                Secure key handling • multimodal responses • context-aware navigation
+            </p>
         </div>
     )
 }
