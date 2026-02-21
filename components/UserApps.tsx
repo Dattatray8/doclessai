@@ -6,14 +6,8 @@ import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-
-type AppType = {
-    _id: string;
-    name: string;
-    description: string;
-    features: any[];
-    contactEmail: string;
-};
+import {Edit, Trash} from "lucide-react";
+import {AppType} from "@/types/global.types";
 
 export default function UserApps() {
     const data = useSelector((state: user) => state.user);
@@ -25,24 +19,41 @@ export default function UserApps() {
     const userId = data?.userData?._id;
 
     const fetchApps = async () => {
-            if (!userId) return;
+        if (!userId) return;
 
-            try {
-                setLoading(true);
-                const res = await axios.get(`/api/v1/app`, {
-                    params: {userId: userId},
-                    withCredentials: true,
-                });
-                setApps(res?.data?.apps || []);
-            } catch
-                (error: any) {
-                console.error(error.response.data);
-                toast.error(error?.response?.data?.message || "Failed to fetch apps");
-            } finally {
-                setLoading(false);
-            }
+        try {
+            setLoading(true);
+            const res = await axios.get(`/api/v1/app`, {
+                params: {userId: userId},
+                withCredentials: true,
+            });
+            setApps(res?.data?.apps || []);
+        } catch
+            (error: any) {
+            setLoading(false);
+            console.error(error.response.data);
+            toast.error(error?.response?.data?.message || "Failed to fetch apps");
+        } finally {
+            setLoading(false);
         }
-    ;
+    }
+    const deleteApp = async (id: string) => {
+        try {
+            if (!id) {
+                toast.error('App not found');
+                return;
+            }
+            const res = await axios.delete(`/api/v1/app/`, {
+                params: {appId: id},
+                withCredentials: true,
+            })
+            toast.success(res.data.message);
+            await fetchApps();
+        } catch (err: any) {
+            console.error(err)
+            toast.error(err?.response?.data?.message || "Failed to delete app");
+        }
+    }
 
     useEffect(() => {
         fetchApps();
@@ -79,6 +90,7 @@ export default function UserApps() {
                             <th>Description</th>
                             <th>Features</th>
                             <th>Email</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
 
@@ -86,7 +98,8 @@ export default function UserApps() {
                         {apps.map((app, index) => (
                             <tr key={app._id} className="hover">
                                 <th>{index + 1}</th>
-                                <td className="font-medium">{app.name}</td>
+                                <td className="font-medium hover:underline hover:cursor-pointer"
+                                    onClick={() => router.push(`/user/${userId}/app/${app._id}`)}>{app.name}</td>
                                 <td className="max-w-md truncate">
                                     {app.description}
                                 </td>
@@ -94,6 +107,12 @@ export default function UserApps() {
                                     {app.features?.length || 0}
                                 </td>
                                 <td>{app.contactEmail}</td>
+                                <td className="flex gap-2"><Edit
+                                    className="w-4 h-4 opacity-80 text-success hover:opacity-100 cursor-pointer"
+                                    onClick={() => router.push(`/user/${userId}/app/${app._id}/edit`)}/>
+                                    <Trash
+                                        className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer text-error"
+                                        onClick={() => deleteApp(app._id)}/></td>
                             </tr>
                         ))}
                         </tbody>

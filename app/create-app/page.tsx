@@ -7,21 +7,7 @@ import toast from "react-hot-toast";
 
 import {user} from "@/types/redux.types";
 import {useRouter} from "next/navigation";
-
-const DEFAULT_FEATURES_JSON = `[
-  {
-    "name": "Pricing Page",
-    "description": "Shows pricing tiers and subscription plans",
-    "route": "/pricing",
-    "elementId": "#pricing-table",
-    "image": "https://yourcdn.com/pricing.png"
-  },
-  {
-    "name": "Login Flow",
-    "description": "User authentication and login process",
-    "route": "/login"
-  }
-]`;
+import {DEFAULT_FEATURES_JSON} from "@/types/global.types";
 
 export default function CreateApp() {
     const data = useSelector((state: user) => state.user);

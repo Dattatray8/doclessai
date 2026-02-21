@@ -9,6 +9,7 @@ import {encrypt} from "@/security/encryption";
 import {generateAppKey, hashAppKey} from "@/security/appKey";
 import User from "@/models/user.model";
 import {v4 as uuidv4} from "uuid";
+import {qdrantClient} from "@/lib/qdrant";
 
 export async function POST(request: NextRequest) {
     const encoder = new TextEncoder();
@@ -86,7 +87,7 @@ export async function POST(request: NextRequest) {
                     appKey: secureAppKey,
                 });
                 controller.close();
-            } catch (error: any) {
+            } catch (error) {
                 console.error(error);
                 sendError("❌ Failed to create app. Check server logs.");
 
@@ -109,23 +110,153 @@ export async function GET(request: NextRequest) {
         await connectDB();
         const {searchParams} = new URL(request.url);
         const userId = searchParams.get("userId");
-        if (!userId) {
-            return NextResponse.json(
-                {success: false, message: "userId is required"},
-                {status: 400}
-            );
+        const appId = searchParams.get("appId");
+
+        if (appId) {
+            const app = await App.findById(appId)
+                .populate("features")
+                .select("name description features contactEmail owner");
+
+            if (!app) {
+                return NextResponse.json({success: false, message: "App not found."}, {status: 404});
+            }
+            return NextResponse.json({success: true, app}, {status: 200});
         }
-        const user = await User.findById(userId).populate("apps");
+
+        if (userId) {
+            const apps = await App.find({owner: userId}).select("name description features contactEmail");
+            return NextResponse.json({success: true, apps}, {status: 200});
+        }
+
+        return NextResponse.json(
+            {success: false, message: "Provide either userId or appId"},
+            {status: 400}
+        );
+
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json(
+            {success: false, message: "Internal server error"},
+            {status: 500}
+        );
+    }
+}
+
+export async function DELETE(request: NextRequest) {
+    try {
+        await connectDB();
+        const {searchParams} = new URL(request.url);
+        const appId = searchParams.get("appId");
+        const app = await App.findById(appId);
+        if (!app) {
+            return NextResponse.json({success: false, message: "App not found"});
+        }
+        const user = await User.findById(app.owner);
         if (!user) {
-            return NextResponse.json({success: false, message: "No user found."}, {status: 404});
+            return NextResponse.json({success: false, message: "App owner not found"});
         }
-        return NextResponse.json({success: true, apps: user.apps}, {status: 200});
+        await Feature.deleteMany({_id: {$in: app.features}});
+        await qdrantClient.delete(process.env.QDRANT_COLLECTION!, {
+            filter: {
+                must: [{key: "appId", match: {value: appId?.toString()}}]
+            }
+        })
+        user.apps.pull(app._id);
+        await user.save();
+        await App.findByIdAndDelete(app._id);
+        return NextResponse.json({success: true, message: "App deleted successfully."});
     } catch (error) {
         console.error(error);
         return NextResponse.json(
             {
                 success: false,
-                message: `Internal server error for fetching apps`,
+                message: `Internal server error for deleting app`,
+            },
+            {status: 500}
+        );
+    }
+}
+
+export async function PUT(request: NextRequest) {
+    try {
+        await connectDB();
+        const formData = await request.formData();
+        const {searchParams} = new URL(request.url);
+        const appId = searchParams.get("appId");
+
+        if (!appId) {
+            return NextResponse.json({success: false, message: "appId is required"}, {status: 400});
+        }
+
+        const app = await App.findById(appId);
+        if (!app) {
+            return NextResponse.json({success: false, message: "App not found"}, {status: 404});
+        }
+
+        const name = formData.get("name")?.toString() || app.name;
+        const description = formData.get("description")?.toString() || app.description;
+        const contactEmail = formData.get("contactEmail")?.toString() || app.contactEmail;
+
+        let encryptedGeminiKey = app.geminiKey;
+        const newGeminiKey = formData.get("geminiKey")?.toString();
+        if (newGeminiKey && newGeminiKey !== "undefined") {
+            encryptedGeminiKey = encrypt(newGeminiKey);
+        }
+
+        await Feature.deleteMany({appId: app._id});
+        await qdrantClient.delete(process.env.QDRANT_COLLECTION!, {
+            filter: {
+                must: [{key: "appId", match: {value: appId.toString()}}]
+            }
+        });
+
+        const featuresJson = formData.get("features")?.toString();
+        const inputFeats = featuresJson ? JSON.parse(featuresJson) : [];
+        const newFeatureIds = [];
+
+        for (const feat of inputFeats) {
+            const feature = await Feature.create({
+                ...feat, appId: app._id,
+            });
+            newFeatureIds.push(feature._id);
+
+            const emb = await generateEmbeddings(feat.description);
+            const qdrantPointId = uuidv4();
+            await upsertFeatureVector({
+                pointId: qdrantPointId,
+                embedding: emb!,
+                payload: {
+                    appId: app._id.toString(),
+                    mongoFeatureId: feature._id.toString(),
+                    name: feature.name,
+                    route: feature.route,
+                },
+            });
+        }
+
+        await App.findByIdAndUpdate(
+            app._id,
+            {
+                name,
+                description,
+                contactEmail,
+                geminiKey: encryptedGeminiKey,
+                features: newFeatureIds,
+            },
+            {new: true}
+        );
+
+        return NextResponse.json({
+            success: true,
+            message: "App and features updated and re-indexed successfully"
+        });
+
+    } catch (error) {
+        console.error("Update Error:", error);
+        return NextResponse.json(
+            {
+                success: false,
+                message: "Internal server error for updating app",
             },
             {status: 500}
         );

@@ -21,7 +21,6 @@ export default function Login() {
     const dispatch = useDispatch();
     const {authLoad} = useSelector((state: user) => state.user)
     const router = useRouter();
-    console.log(formValue)
 
     return (
         <div className="flex justify-center mt-5 sm:mt-20">
@@ -88,7 +87,10 @@ export default function Login() {
                                 letter
                             </p>
                         </div>
-                        <button className="btn" onClick={() => handleLogin({formValue, dispatch})}>{authLoad ? (
+                        <button className="btn" onClick={async () => {
+                            await handleLogin({formValue, dispatch});
+                            router.push('/');
+                        }}>{authLoad ? (
                             <span className="loading loading-spinner text-neutral"></span>
                         ) : "Login"}</button>
                         <div>
