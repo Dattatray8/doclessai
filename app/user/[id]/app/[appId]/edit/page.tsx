@@ -69,13 +69,9 @@ export default function EditApp({params}: { params: { appId: string } }) {
         parsedFeatures.length > 0 &&
         !featuresError;
 
-    const getParams = async (params) => {
-        return await params;
-    }
-
     const fetchApp = async () => {
         try {
-            const resolvedParams = await getParams(params);
+            const resolvedParams = await params;
             const res = await axios.get(`/api/v1/app`, {params: {appId: resolvedParams.appId}, withCredentials: true});
             console.log(res.data);
             setApp(res.data.app);
