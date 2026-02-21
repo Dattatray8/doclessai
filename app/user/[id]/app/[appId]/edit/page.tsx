@@ -19,7 +19,7 @@ export default function EditApp({params}: { params: { appId: string } }) {
     const [geminiKey, setGeminiKey] = useState("");
     const [featuresJson, setFeaturesJson] = useState(DEFAULT_FEATURES_JSON);
     const [featuresError, setFeaturesError] = useState<string | null>(null);
-    const [parsedFeatures, setParsedFeatures] = useState([]);
+    const [parsedFeatures, setParsedFeatures] = useState<Feature[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
