@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function GetStartedPage() {
     return (
-        <div className="flex flex-col gap-10 md:p-8 max-w-5xl mx-auto mb-20 text-base-content">
+        <div className="flex flex-col gap-10 md:p-8 max-w-5xl mx-auto mb-20 text-base-content" id="docs">
             <div className="hero bg-base-200 rounded-3xl p-6 md:p-12 shadow-inner border border-base-300">
                 <div className="hero-content flex-col lg:flex-row-reverse gap-8">
                     <div className="text-center lg:text-left">

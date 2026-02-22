@@ -198,7 +198,7 @@ export default function CreateApp() {
                 </div>
             </dialog>
 
-            <div className="card-body">
+            <div className="card-body" id="create-app">
                 <div className="text-2xl font-semibold">Create App</div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">

@@ -60,7 +60,7 @@ export default function UserApps() {
     }, [userId]);
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4" id="dashboard">
             <div className="p-2 flex justify-between items-center">
                 <p className="text-2xl font-semibold">My Apps</p>
                 <button

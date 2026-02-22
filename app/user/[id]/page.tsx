@@ -62,7 +62,7 @@ export default function Profile() {
     return (
         <div className="flex flex-col gap-4">
             <div className="card bg-base-300">
-                <div className="card-body">
+                <div className="card-body" id="profile">
                     <Icon className="absolute right-6 cursor-pointer hover:text-accent transition-all"
                           onClick={() => setEdit(!edit)}/>
                     {!edit && (

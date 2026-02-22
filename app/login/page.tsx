@@ -25,7 +25,7 @@ export default function Login() {
     return (
         <div className="flex justify-center mt-5 sm:mt-20">
             <div className="card w-96 bg-base-100 shadow-md">
-                <div className="card-body">
+                <div className="card-body" id="login">
                     <div className="flex flex-col gap-2 items-center">
                         <div className={`${appNameFont.className} text-4xl`}>DoclessAI</div>
                         <p>Login to get started</p>
