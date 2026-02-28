@@ -2,13 +2,14 @@
 
 import AppFeatures from "@/components/AppFeatures";
 import { useEffect, useState } from "react";
-import { AppType } from "@/types/global.types";
+import { AppType, Feature } from "@/types/global.types";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 export default function App({ params }: { params: { appId: string } }) {
     const [app, setApp] = useState<AppType | null>(null);
-    
+    const [features, setFeatures] = useState<Feature[]>([]);
+
     const fetchApp = async () => {
         const resolvedParams = await params;
         try {
@@ -20,6 +21,18 @@ export default function App({ params }: { params: { appId: string } }) {
             toast.error(err?.response?.data?.message || "Failed to fetch app");
         }
     }
+
+    useEffect(() => {
+        if (app) {
+            setFeatures(app?.features.map((item: Feature) => ({
+                name: item.name,
+                description: item.description,
+                route: item.route,
+                image: item.image,
+                elementId: item.elementId
+            })));
+        }
+    }, [app])
 
     useEffect(() => {
         fetchApp();
@@ -36,7 +49,7 @@ export default function App({ params }: { params: { appId: string } }) {
                 <p className="textarea w-full mt-4">{app?.description}</p>
 
                 <div className="mt-5">
-                    <AppFeatures featues={JSON.stringify(app?.features, null, 2)} />
+                    <AppFeatures featues={JSON.stringify(features, null, 2)} />
                 </div>
             </div>
         </div>
