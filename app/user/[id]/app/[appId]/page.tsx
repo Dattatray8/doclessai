@@ -1,8 +1,10 @@
 import AppModel from "@/models/app.model";
 import AppFeatures from "@/components/AppFeatures";
 import {Feature} from "@/types/global.types";
+import connectDB from "@/lib/db";
 
 export default async function App({params}: { params: { appId: string } }) {
+    await connectDB();
     const resolvedParams = await params;
     console.log(resolvedParams.appId);
     const app = await AppModel.findById(resolvedParams.appId).populate("features");
