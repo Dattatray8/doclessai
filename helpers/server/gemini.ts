@@ -128,7 +128,7 @@ User Query: ${query || "User sent an image without text."}
         });
     }
     const res = await genAi.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-2.5-flash",
         contents: [{role: "user", parts}]
     });
 
