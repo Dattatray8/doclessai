@@ -11,7 +11,6 @@ import {DEFAULT_FEATURES_JSON} from "@/types/global.types";
 
 export default function CreateApp() {
     const data = useSelector((state: user) => state.user);
-    const {theme} = useSelector((state: user) => state.user);
     const router = useRouter();
     const [name, setName] = useState("");
     const [contactEmail, setContactEmail] = useState("");
@@ -249,7 +248,7 @@ export default function CreateApp() {
                         height="300px"
                         defaultLanguage="json"
                         value={featuresJson}
-                        theme={theme === "dark" ? "vs-dark" : "vs-light"}
+                        theme={"vs-dark"}
                         onChange={(v) => setFeaturesJson(v || "")}
                     />
 

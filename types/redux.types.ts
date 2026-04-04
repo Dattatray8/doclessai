@@ -14,8 +14,5 @@ export interface user {
       image: string;
       id: string
     };
-    theme: Theme;
   };
 }
-
-export type Theme = "light" | "dark";

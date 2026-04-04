@@ -1,4 +1,3 @@
-import { Theme } from "@/types/redux.types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
@@ -6,7 +5,6 @@ const userSlice = createSlice({
   initialState: {
     authLoad: false,
     userData: null,
-    theme: "light" as Theme,
     authUser: null,
   },
   reducers: {
@@ -16,16 +14,13 @@ const userSlice = createSlice({
     setUserData: (state, action) => {
       state.userData = action.payload;
     },
-    setTheme: (state, action: PayloadAction<Theme>) => {
-      state.theme = action.payload;
-    },
     setAuthUser: (state, action) => {
       state.authUser = action.payload;
     },
   },
 });
 
-export const { setAuthLoad, setUserData, setTheme, setAuthUser } =
+export const { setAuthLoad, setUserData, setAuthUser } =
   userSlice.actions;
 
 export default userSlice.reducer;
