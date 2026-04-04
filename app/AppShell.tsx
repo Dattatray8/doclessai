@@ -1,6 +1,5 @@
 'use client';
 
-import ThemeController from "@/components/ThemeController";
 import {handleSignOut} from "@/helpers/client/user";
 import {LogOut} from "lucide-react";
 import {Archivo_Black} from "next/font/google";
@@ -39,10 +38,9 @@ export default function AppShell({children}: { children: React.ReactNode }) {
                         <Link href={'/'} className={`${appNameFont.className} text-2xl`}>DoclessAI</Link>
                     </div>
                     <div className="flex items-center pr-4 gap-4">
-                        <div><ThemeController/></div>
                         {session?.user && (
                             <LogOut onClick={() => handleSignOut(router, dispatch)}
-                                    className="cursor-pointer hover:text-accent transition-all"/>
+                                    className="cursor-pointer hover:text-error transition-all"/>
                         )}
                     </div>
                 </nav>

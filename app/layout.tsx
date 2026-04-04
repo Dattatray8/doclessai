@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientProvider from "./ClientProvider";
 import { Toaster } from "react-hot-toast";
-import ThemeProvider from "./ThemeProvider";
 import SessionHydrator from "@/components/SessionHydrator";
 import UserHydrator from "@/components/UserHydrator";
 import AppShell from "./AppShell";
@@ -35,14 +34,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ClientProvider>
-          <ThemeProvider>
             <SessionHydrator />
             <UserHydrator />
             <AppShell>
               {children}
             </AppShell>
             <Toaster position="top-center" reverseOrder={false} />
-          </ThemeProvider>
         </ClientProvider>
       </body>
     </html>
