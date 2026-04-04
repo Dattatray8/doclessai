@@ -4,14 +4,11 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {AppType, DEFAULT_FEATURES_JSON, Feature} from "@/types/global.types";
-import {useSelector} from "react-redux";
-import {user} from "@/types/redux.types";
 import {useRouter} from "next/navigation";
 import {Editor} from "@monaco-editor/react";
 
 export default function EditApp({params}: { params: { appId: string } }) {
     const [app, setApp] = useState<AppType>();
-    const {theme} = useSelector((state: user) => state.user);
     const router = useRouter();
     const [name, setName] = useState("");
     const [contactEmail, setContactEmail] = useState("");
@@ -164,7 +161,7 @@ export default function EditApp({params}: { params: { appId: string } }) {
                             height="300px"
                             defaultLanguage="json"
                             value={featuresJson}
-                            theme={theme === "dark" ? "vs-dark" : "vs-light"}
+                            theme={"vs-dark"}
                             onChange={(v) => setFeaturesJson(v || "")}
                         />
 
