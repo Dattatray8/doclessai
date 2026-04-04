@@ -21,7 +21,7 @@ export default function GetStartedPage() {
                             Ready to build?
                         </h1>
                         <p className="py-6 text-lg md:text-xl opacity-80">
-                            Connect your application to DoclessAI in seconds.
+                            Connect your application to DoclessAI.
                             Add a context-aware AI assistant using our drop-in widget or headless SDK.
                         </p>
                         <Link href="/user"
@@ -38,7 +38,7 @@ export default function GetStartedPage() {
             </div>
 
             <p className="text-sm opacity-60 mt-2">
-                Works with React, Next.js, and modern JavaScript frameworks.
+                Works with React, Next.js, and plain HTML.
             </p>
 
             <section className="flex flex-col gap-4">
