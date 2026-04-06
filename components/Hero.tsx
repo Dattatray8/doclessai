@@ -47,7 +47,7 @@ export default function Hero() {
                     >
                         Get Started
                     </button>
-                    <button className="btn text-primary border border-primary bg-[#eef2ff] hover:bg-[#eef2ff]/80" onClick={() => router.push('/get-started')}>Documentation
+                    <button className="btn text-primary border border-primary bg-[#eef2ff] hover:bg-[#eef2ff]/80" onClick={() => router.push('/docs')}>Documentation
                     </button>
                 </motion.div>
 

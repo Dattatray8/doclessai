@@ -1,2 +1,71 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@theme {
+  --bg: #07090f;
+  --bg2: #0c0f1a;
+  --bg3: #111520;
+  --border: rgba(255, 255, 255, 0.06);
+  --border2: rgba(255, 255, 255, 0.11);
+  --accent: #6c63ff;
+  --accent2: #4f8bf9;
+  --green: #3ecfa0;
+  --text: #e8ecf4;
+  --muted: #5a6580;
+  --muted2: #8594ae;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Sora", sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+@layer components {
+
+    .nav-wrap {
+        @apply sticky top-0 z-50 bg-(--bg) backdrop-blur-2xl border-b border-(--border)
+    }
+
+    .nav-inner {
+        @apply max-w-280 mx-auto h-15 px-5 flex justify-between items-center gap-3 
+    }
+
+    .nav-links {
+        @apply flex gap-0.5 list-none m-0 p-0
+    }
+
+    .nav-links li {
+        @apply text-[13.5px] text-(--muted2) py-1.5 px-3 rounded-md transition-all duration-200 whitespace-nowrap
+    }
+
+    .nav-links li:hover {
+        @apply text-(--text) bg-(--border)
+    }
+
+    .nav-actions {
+        @apply flex gap-2 items-center shrink-0
+    }
+
+    .btn-nav-ghost {
+        @apply text-[13px] text-(--muted2) bg-none border-none cursor-pointer py-1.5 px-3 rounded-lg transition-all duration-200
+    }
+    
+    .btn-nav-ghost:hover {
+        @apply text-(--text) bg-(--border)
+    }
+
+    .btn-nav-primary {
+        @apply text-[13px] text-white font-semibold bg-(--accent) border-none cursor-pointer py-2 px-4 rounded-lg transition-opacity duration-200 whitespace-nowrap
+    }
+
+    .btn-nav-primary:hover {
+        @apply opacity-85
+    }
+}
