@@ -68,4 +68,8 @@ body {
     .btn-nav-primary:hover {
         @apply opacity-85
     }
+
+    .menu-bar-toggle {
+        @apply cursor-pointer opacity-60 transition-opacity duration-200 w-5 h-5 hover:opacity-100
+    }
 }
