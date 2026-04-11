@@ -31,6 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         cz-shortcut-listen="true"
+        data-theme="dark"
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ClientProvider>
