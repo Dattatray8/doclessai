@@ -38,6 +38,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                             <Link
                                 href="https://github.com/Dattatray8/doclessai-sdk"
                                 target="_blank"
+                                rel="noopener noreferrer"
                             >GitHub
                             </Link>
                         </li>
@@ -77,6 +78,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                                     <Link
                                         href="https://github.com/Dattatray8/doclessai-sdk"
                                         target="_blank"
+                                        rel="noopener noreferrer"
                                         className={`${tabFont.className} text-(--muted2) hover:text-(--text) block py-2 transition-colors`}
                                         onClick={() => setIsMenuOpen(false)}
                                     >GitHub
@@ -99,7 +101,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <div className="p-4">
                 {children}
             </div>
-            <ChatWidget appKey="doclessai_live_49dc73c122c28d1ba1f706905ece7df1a84caba067f5e22ed5ff14de01bef5e1"
+            <ChatWidget appKey={process.env.NEXT_PUBLIC_DOCLESSAI_APP_KEY!}
                 name="DoclessAI" />
         </div>
     );
