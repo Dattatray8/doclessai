@@ -1,2 +1,157 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@theme {
+  --bg: #07090f;
+  --bg2: #0c0f1a;
+  --bg3: #111520;
+  --border: rgba(255, 255, 255, 0.06);
+  --border2: rgba(255, 255, 255, 0.11);
+  --accent: #6c63ff;
+  --accent2: #4f8bf9;
+  --green: #3ecfa0;
+  --text: #e8ecf4;
+  --muted: #5a6580;
+  --muted2: #8594ae;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Sora, sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+@layer components {
+
+    .nav-wrap {
+        @apply sticky top-0 z-50 bg-(--bg) backdrop-blur-2xl border-b border-[#FFFFFF0F]
+    }
+
+    .nav-inner {
+        @apply max-w-280 mx-auto h-15 px-5 flex justify-between items-center gap-3 
+    }
+
+    .nav-links {
+        @apply flex gap-0.5 list-none m-0 p-0
+    }
+
+    .nav-links li {
+        @apply text-[13.5px] text-(--muted2) py-1.5 px-3 rounded-md transition-all duration-200 whitespace-nowrap
+    }
+
+    .nav-links li:hover {
+        @apply text-(--text) bg-(--border)
+    }
+
+    .nav-actions {
+        @apply flex gap-2 items-center shrink-0
+    }
+
+    .btn-nav-ghost {
+        @apply text-[13px] text-(--muted2) bg-none border-none cursor-pointer py-1.5 px-3 rounded-lg transition-all duration-200
+    }
+    
+    .btn-nav-ghost:hover {
+        @apply text-(--text) bg-(--border)
+    }
+
+    .btn-nav-primary {
+        @apply text-[13px] text-white font-semibold bg-(--accent) border-none cursor-pointer py-2 px-4 rounded-lg transition-opacity duration-200 whitespace-nowrap
+    }
+
+    .btn-nav-primary:hover {
+        @apply opacity-85
+    }
+
+    .menu-bar-toggle {
+        @apply cursor-pointer opacity-60 transition-opacity duration-200 w-5 h-5 hover:opacity-100
+    }
+
+    .hero {
+        @apply relative mx-auto max-w-215 md:px-5 pb-17.5 pt-20 text-center
+    }
+
+    .hero-glow {
+        @apply pointer-events-none absolute left-1/2 -top-20 z-0 h-112.5 w-175 -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(108,99,255,0.12)_0%,transparent_65%)]
+    }
+
+    .hero-actions {
+        @apply flex gap-2.5 justify-center flex-wrap 
+    }
+
+    .hero-badge {
+        @apply inline-flex items-center gap-1.75 rounded-full border border-[#6c63ff]/25 bg-[#6c63ff]/10 px-3.5 py-1.25 mb-6.5 text-[12px] font-medium text-[#a29dff] tracking-wide
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center gap-1.5 rounded-[9px] border-none bg-(--accent) px-5.5 py-3 font-['Sora'] text-[14px] text-white no-underline transition-all duration-200 hover:opacity-[0.87] hover:-translate-y-px active:scale-95 cursor-pointer
+    }
+
+
+    .btn-outline {
+        @apply inline-flex items-center gap-1.5 rounded-[9px] border border-(--border2) bg-transparent px-5.5 py-3 font-['Sora'] text-[14px] text-(--text) no-underline transition-all duration-200 hover:bg-white/5 hover:border-white/20 cursor-pointer
+    }
+
+    .hero-sub {
+        @apply mx-auto mb-8.5 max-w-125 text-[clamp(15px,2vw,17px)] font-light leading-[1.7] text-(--muted2)
+    }
+
+    .npm-tag {
+        @apply inline-flex items-center gap-2 bg-(--bg3) border border-[#FFFFFF0F] rounded-lg py-2 px-3.5 text-(--muted2) my-9
+    }
+
+    .npm-tag .cmd {
+        @apply text-(--text)
+    }
+
+    .file-name {
+        @apply absolute top-4 left-20 text-(--muted) text-sm
+    }
+
+    .tk-kw {
+        @apply text-[#a29dff]
+    }
+    
+    .tk-fn {
+        @apply text-[#4f8bf9]
+    }
+      
+    .tk-str {
+        @apply text-[#f0a36a]
+    }
+      
+    .tk-prop {
+        @apply text-[#3ecfa0]
+    }
+      
+    .tk-cmt {
+        @apply text-[#3b4460] italic
+    }
+
+    .logos-bar {
+        @apply border-y border-[#FFFFFF0F] bg-(--bg2) p-5 flex items-center justify-center overflow-x-auto gap-2
+    }
+
+    .logos-label {
+        @apply text-[11px] text-(--muted) uppercase whitespace-nowrap mr-7 tracking-widest
+    }
+
+    .logos-items {
+        @apply flex gap-7 justify-center items-center
+    }
+
+    .logo-pill {
+        @apply text-[12.5px] font-medium text-(--muted) opacity-50 tracking-[0.4em]
+    }
+}

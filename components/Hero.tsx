@@ -1,66 +1,41 @@
 'use client'
 
-import { Archivo_Black } from "next/font/google";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-
-const appNameFont = Archivo_Black({
-    subsets: ['latin'],
-    weight: ['400']
-});
+import Link from "next/link";
 
 export default function Hero() {
-    const router = useRouter();
 
     return (
-        <section className="relative flex items-center justify-center min-h-[70vh] px-6 overflow-hidden" id="home">
-
-            <div className="flex flex-col items-center text-center gap-8">
-
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className={`${appNameFont.className} text-5xl sm:text-7xl tracking-tight drop-shadow-xl`}
-                >
-                    DoclessAI
-                </motion.div>
-
-                <motion.p
-                    initial={{ opacity: 0, y: 25 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15, duration: 0.6 }}
-                    className="font-bold text-lg sm:text-2xl max-w-2xl leading-tight"
-                >
-                    Add an AI Assistant That Explains Your App
-                </motion.p>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 25 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.6 }}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-3"
-                >
-                    <button
-                        onClick={() => router.push('/register')}
-                        className="btn btn-primary"
-                    >
-                        Get Started
-                    </button>
-                    <button className="btn text-primary border border-primary bg-[#eef2ff] hover:bg-[#eef2ff]/80" onClick={() => router.push('/get-started')}>Documentation
-                    </button>
-                </motion.div>
-
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.45, duration: 0.6 }}
-                    className="text-sm max-w-xl opacity-80"
-                >
-                    DoclessAI provides instant contextual help inside your application —
-                    reducing support load and improving user experience.
-                </motion.p>
-
+        <section className="hero" id="home">
+            <div className="hero-glow"></div>
+            <div className="hero-content flex-col">
+                <div className="hero-badge">Now on npm · @doclessai/sdk</div>
+                <h1 className="mb-5 font-bold leading-[1.08] tracking-[-1.5px] text-[clamp(36px,6vw,68px)]">DoclessAI <br />
+                    <span className="bg-linear-to-br from-[#a29dff] via-[#6c63ff] via-45% to-[#4f8bf9] bg-clip-text text-transparent">Your app explains itself.</span>
+                </h1>
+                <p className="hero-sub">Embed a context-aware AI assistant with your app knowledge into any application. Users ask
+                    questions — the AI will answer it.</p>
+                <div className="hero-actions">
+                    <Link href='/docs' className="btn-primary">Start Building</Link>
+                    <Link href='https://github.com/Dattatray8/doclessai-sdk' className="btn-outline">View on GitHub</Link>
+                </div>
+                <div className="npm-tag">
+                    <pre><code className="cmd">$ npm i @doclessai/sdk</code></pre>
+                </div>
+                <div className="mockup-code w-full" style={{ background: '#111520', border: '1px solid #111520' }}>
+                    <span className="file-name">App.tsx</span>
+                    <div className="code-body max-w-64 text-start">
+                        <pre data-prefix="1"><code><span className="tk-kw">import</span> <span className="tk-kw">{"{"}</span> <span className="tk-fn">ChatWidget</span> <span className="tk-kw">{"}"}</span> <span className="tk-kw">from</span> <span className="tk-str">{"'@doclessai/sdk'"}</span></code></pre>
+                        <pre data-prefix="2"><code></code></pre>
+                        <pre data-prefix="3"><code><span className="tk-kw">export default function</span> <span className="tk-fn">App</span><span className="text-[#3b4460]">{"()"}</span><span className="tk-kw">{"\t{"}</span></code></pre>
+                        <pre data-prefix="4"><code className="tk-kw">{"\treturn ("}</code></pre>
+                        <pre data-prefix="5"><code className="tk-kw">{`\t\t<div>`}</code></pre>
+                        <pre data-prefix="6"><code className="tk-cmt">{"\t\t\t{/* AI assistant — one JSX tag */}"}</code></pre>
+                        <pre data-prefix="7"><code><span className="tk-kw">{"\t\t\t<ChatWidget"}</span><span className="tk-prop">{"appKey"}</span><span className="tk-kw">{"="}</span><span className="tk-str">{`"your-app-key"`}</span><span className="tk-prop">{" name"}</span><span className="tk-kw">=</span><span className="tk-str">{`"your-assistant-name"`}</span><span className="tk-kw">{" />"}</span></code></pre>
+                        <pre data-prefix="8"><code className="tk-kw">{"\t\t</div>"}</code></pre>
+                        <pre data-prefix="9"><code className="tk-kw">{"\t)"}</code></pre>
+                        <pre data-prefix="10"><code className="tk-kw">{"}"}</code></pre>
+                    </div>
+                </div>
             </div>
         </section>
     );
