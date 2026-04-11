@@ -35,7 +35,7 @@ body {
 @layer components {
 
     .nav-wrap {
-        @apply sticky top-0 z-50 bg-(--bg) backdrop-blur-2xl border-b border-(--border)
+        @apply sticky top-0 z-50 bg-(--bg) backdrop-blur-2xl border-b border-[#FFFFFF0F]
     }
 
     .nav-inner {
@@ -105,5 +105,53 @@ body {
 
     .hero-sub {
         @apply mx-auto mb-8.5 max-w-125 text-[clamp(15px,2vw,17px)] font-light leading-[1.7] text-(--muted2)
+    }
+
+    .npm-tag {
+        @apply inline-flex items-center gap-2 bg-(--bg3) border border-[#FFFFFF0F] rounded-lg py-2 px-3.5 text-(--muted2) my-9
+    }
+
+    .npm-tag .cmd {
+        @apply text-(--text)
+    }
+
+    .file-name {
+        @apply absolute top-4 left-20 text-(--muted) text-sm
+    }
+
+    .tk-kw {
+        @apply text-[#a29dff]
+    }
+    
+    .tk-fn {
+        @apply text-[#4f8bf9]
+    }
+      
+    .tk-str {
+        @apply text-[#f0a36a]
+    }
+      
+    .tk-prop {
+        @apply text-[#3ecfa0]
+    }
+      
+    .tk-cmt {
+        @apply text-[#3b4460] italic
+    }
+
+    .logos-bar {
+        @apply border-y border-[#FFFFFF0F] bg-(--bg2) p-5 flex items-center justify-center overflow-x-auto gap-2
+    }
+
+    .logos-label {
+        @apply text-[11px] text-(--muted) uppercase whitespace-nowrap mr-7 tracking-widest
+    }
+
+    .logos-items {
+        @apply flex gap-7 justify-center items-center
+    }
+
+    .logo-pill {
+        @apply text-[12.5px] font-medium text-(--muted) opacity-50 tracking-[0.4em]
     }
 }
