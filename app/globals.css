@@ -154,4 +154,40 @@ body {
     .logo-pill {
         @apply text-[12.5px] font-medium text-(--muted) opacity-50 tracking-[0.4em]
     }
+
+    .section-tag {
+        @apply inline-block font-semibold uppercase text-(--accent) mb-3 tracking-wide text-[11px]
+    }
+
+    .section-h2 {
+        @apply mb-3 text-[clamp(26px,3.5vw,42px)] font-bold leading-[1.15] tracking-[-1px]
+    }
+
+    .section-sub {
+        @apply mb-0 max-w-115 text-[15px] font-light leading-[1.7] text-(--muted2)
+    }
+
+    .steps-wrap {
+        @apply mt-11 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-[#FFFFFF0F] bg-[#ffffff0f] sm:grid-cols-2 lg:grid-cols-4
+    }
+
+    .step-card {
+        @apply bg-(--bg2) px-5.5 py-7 transition-colors duration-200 hover:bg-(--bg3)
+    }
+
+    .step-num {
+        @apply mb-3.5 text-[11px] font-bold tracking-[0.12em] text-(--accent) uppercase
+    }
+
+    .step-icon {
+        @apply mb-3.5 flex h-9.5 w-9.5 items-center justify-center rounded-[9px] border border-[#6c63ff]/20 bg-[#6c63ff]/10 text-base
+    }
+
+    .step-title {
+        @apply mb-1.5 text-[14px] font-semibold
+    }
+
+    .step-desc {
+        @apply text-[12.5px] leading-[1.65] text-(--muted2)
+    }
 }
