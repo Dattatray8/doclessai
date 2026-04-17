@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Hero() {
 
     return (
-        <section className="hero" id="home">
+        <section className="hero overflow-x-hidden" id="home">
             <div className="hero-glow"></div>
             <div className="hero-content flex-col">
                 <div className="hero-badge">Now on npm · @doclessai/sdk</div>
@@ -16,7 +16,8 @@ export default function Hero() {
                     questions — the AI will answer it.</p>
                 <div className="hero-actions">
                     <Link href='/docs' className="btn-primary">Start Building</Link>
-                    <Link href='https://github.com/Dattatray8/doclessai-sdk' className="btn-outline">View on GitHub</Link>
+                    <Link href='https://github.com/Dattatray8/doclessai-sdk' target="_blank"
+                        rel="noopener noreferrer" className="btn-outline">View on GitHub</Link>
                 </div>
                 <div className="npm-tag">
                     <pre><code className="cmd">$ npm i @doclessai/sdk</code></pre>
