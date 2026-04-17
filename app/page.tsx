@@ -1,10 +1,11 @@
 'use client'
 
-import CTA from "@/components/CTA";
-import Features from "@/components/Features";
-import Hero from "@/components/Hero";
-import WorkWithTech from "@/components/WorkWithTech";
-import Working from "@/components/Working";
+import CTA from "@/components/landing/CTA";
+import Features from "@/components/landing/Features";
+import Footer from "@/components/landing/Footer";
+import Hero from "@/components/landing/Hero";
+import WorkWithTech from "@/components/landing/WorkWithTech";
+import Working from "@/components/landing/Working";
 
 export default function Home() {
     return (
@@ -14,6 +15,7 @@ export default function Home() {
             <Working />
             <Features />
             <CTA />
+            <Footer />
         </div>
     );
 }

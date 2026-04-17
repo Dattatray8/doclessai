@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Hero() {
 
     return (
-        <section className="hero" id="home">
+        <section className="hero overflow-x-hidden" id="home">
             <div className="hero-glow"></div>
             <div className="hero-content flex-col">
                 <div className="hero-badge">Now on npm · @doclessai/sdk</div>
