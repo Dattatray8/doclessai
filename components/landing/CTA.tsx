@@ -14,6 +14,7 @@ const CTA = () => {
                     <Link
                         href="https://www.npmjs.com/package/@doclessai/sdk"
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="btn-outline"
                     >View on npm</Link>
                 </div>

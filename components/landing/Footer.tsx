@@ -52,7 +52,8 @@ const Footer = () => {
                             <ul>
                                 {tab.tabs.map((subtab, subidx) => (
                                     <li key={subidx}>
-                                        <Link href={subtab.href}>{subtab.title}</Link>
+                                        <Link href={subtab.href} target="_blank"
+                                            rel="noopener noreferrer">{subtab.title}</Link>
                                     </li>
                                 ))}
                             </ul>
@@ -60,10 +61,15 @@ const Footer = () => {
                     ))}
                 </div>
                 <div className="footer-bottom">
-                    <span>© 2025 DoclessAI · Built by <Link href={"https://github.com/Dattatray8"} className="text-(--accent)">Dattatray</Link></span>
+                    <span>© 2025 DoclessAI · Built by <Link href={"https://github.com/Dattatray8"} target="_blank"
+                        rel="noopener noreferrer" className="text-(--accent)">Dattatray</Link></span>
                     <div className="footer-links-row">
-                        <Link href={"https://github.com/Dattatray8/doclessai-sdk"}>Github</Link>
-                        <Link href={"https://www.npmjs.com/package/@doclessai/sdk"}>npm</Link>
+                        <Link href={"https://github.com/Dattatray8/doclessai-sdk"}
+                            target="_blank"
+                            rel="noopener noreferrer">Github</Link>
+                        <Link href={"https://www.npmjs.com/package/@doclessai/sdk"}
+                            target="_blank"
+                            rel="noopener noreferrer">npm</Link>
                         <Link href={"/privacy"}>Privacy</Link>
                     </div>
                 </div>

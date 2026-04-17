@@ -55,7 +55,7 @@ const Features = () => {
             </p>
             <div className="feat-grid">
                 {features.map((feat, i)=>(
-                    <div key={i} className={`feat-card ${feat.icon === "🧠" && "hl"}`}>
+                    <div key={i} className={`feat-card ${feat.icon === "🧠" ? "hl" : ""}`}>
                         <div className={`feat-icon ${feat.className}`}>{feat.icon}</div>
                         <div className="feat-title">{feat.title}</div>
                         <div className="feat-desc">{feat.description}</div>
