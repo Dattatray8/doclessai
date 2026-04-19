@@ -11,6 +11,7 @@
   --accent2: #4f8bf9;
   --green: #3ecfa0;
   --text: #e8ecf4;
+  --red: #f87171;
   --muted: #5a6580;
   --muted2: #8594ae;
 }
@@ -296,5 +297,73 @@ body {
 
     .footer-links-row {
         @apply flex gap-4;
+    }
+
+    .create-app-card {
+        @apply mx-auto max-w-215 sm:px-5 px-2 pb-15 pt-2 sm:pt-9;
+    }
+
+    .create-app-page-header {
+        @apply mb-7;
+    }
+
+    .create-app-breadcrumb {
+        @apply mb-2.5 flex items-center gap-1.25 text-[12px] text-(--muted);
+    }
+
+    .create-app-breadcrumb a {
+        @apply text-(--muted2) no-underline transition-colors duration-200 hover:text-(--text);
+    }
+
+    .create-app-title {
+        @apply text-[28px] font-bold tracking-[-0.8px];
+    }
+
+    .create-app-sub {
+        @apply mt-1.5 text-[14px] leading-[1.6] text-(--muted2);
+    }
+
+    .create-app-form-card {
+        @apply mb-4 rounded-2xl border border-[#FFFFFF0F] bg-(--bg2) p-5 sm:p-7;
+    }
+
+    .create-app-section-label {
+        @apply mb-4 text-[11px] font-bold uppercase tracking-[0.12em] text-(--muted);
+    }
+
+    .create-app-input-row {
+        @apply mb-3 grid grid-cols-1 gap-3 sm:grid-cols-2;
+    }
+
+    .create-app-input-group {
+        @apply flex flex-col gap-1.5;
+    }
+
+    .create-app-input-label {
+        @apply text-[12.5px] font-medium text-(--muted2);
+    }
+
+    .create-app-input-label span.req {
+        @apply ml-0.75 text-(--red);
+    }
+
+    .create-app-field-input {
+        @apply w-full rounded-[9px] border border-(--border2) bg-(--bg3) px-3.5 py-2.75 font-["Sora",sans-serif] text-[13.5px] text-(--text) outline-none transition-all duration-200 placeholder:text-(--muted);
+    }
+
+    .create-app-field-input:focus {
+        @apply border-[#6c63ff]/50 ring-4 ring-[#6c63ff]/8;
+    }
+
+    .create-app-field-textarea {
+        @apply min-h-22.5 resize-y leading-[1.6];
+    }
+
+    .create-app-field-input.mono {
+        @apply font-["JetBrains_Mono",monospace] text-[12.5px];
+    }
+
+    .create-app-hint {
+        @apply mt-1 text-[11.5px] leading-normal text-(--muted);
     }
 }
