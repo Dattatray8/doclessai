@@ -129,15 +129,15 @@ export default function CreateApp() {
     }, [finalResult]);
 
     return (
-        <div className="create-app-card">
-            <div className="create-app-page-header">
-                <div className="create-app-breadcrumb">
+        <div className="page">
+            <div className="page-header">
+                <div className="breadcrumb">
                     <Link href="/user">Dashboard</Link>
                     <span>›</span>
                     <span className="text-(--text)">Create App</span>
                 </div>
-                <div className="create-app-title">Create a new app</div>
-                <div className="create-app-sub">
+                <div className="page-title">Create a new app</div>
+                <div className="page-sub">
                     Your app&apos;s features teach the AI what your application does. Users
                     will chat with the assistant to get answers about these features.
                 </div>

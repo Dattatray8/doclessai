@@ -1,10 +1,11 @@
 'use client'
 
-import {useRef, useState} from "react";
-import {cloudinaryPipeline} from "@/helpers/server/cloudinary";
+import { useRef, useState } from "react";
+import { cloudinaryPipeline } from "@/helpers/server/cloudinary";
 import toast from "react-hot-toast";
-import {Copy, Upload} from "lucide-react";
+import { Copy, Upload } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CloudinaryPipelinePage() {
     const [cloudName, setCloudName] = useState<string>('');
@@ -57,33 +58,60 @@ export default function CloudinaryPipelinePage() {
     }
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="page">
+            <div className="page-header">
+                <div className="breadcrumb">
+                    <Link href="/user">Dashboard</Link>
+                    <span>›</span>
+                    <span className="text-(--text)">Cloudinary Pipeline</span>
+                </div>
+                <div className="page-title">🖼 Image Hosting</div>
+                <div className="page-sub">
+                    Upload images and get public URLs to use in your feature definitions.
+                    The AI can then return these images when users ask about relevant
+                    features.
+                </div>
+            </div>
+
+            <div className="callout callout-info mb-5">
+                <span className="callout-icon">ℹ️</span>
+                <p>
+                    <strong>Why this exists:</strong> Feature images must be publicly
+                    accessible URLs. This pipeline lets you upload images directly to
+                    Cloudinary without leaving DoclessAI — no separate image hosting setup
+                    needed. You need a free <Link
+                        href="https://cloudinary.com"
+                        target="_blank"
+                        className="text-(--accent)"
+                    >Cloudinary account ↗</Link>
+                </p>
+            </div>
             {url && (
                 <div className={"input w-full flex justify-between"}>
                     <p className={"truncate max-w-56 sm:max-w-full"}>{url}</p>
                     <Copy className={"w-4 h-4 cursor-pointer opacity-80 hover:opacity-100"}
-                          onClick={() => copyToClipboard(url)}/>
+                        onClick={() => copyToClipboard(url)} />
                 </div>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <input className="input w-full" value={cloudName} onChange={(e) => setCloudName(e.target.value)}
-                       placeholder="Enter cloud name"/>
+                    placeholder="Enter cloud name" />
                 <input className="input w-full" value={apiKey} onChange={(e) => setApiKey(e.target.value)}
-                       placeholder="Enter api key"/>
+                    placeholder="Enter api key" />
                 <input className="input w-full" value={apiSecret} onChange={(e) => setApiSecret(e.target.value)}
-                       placeholder="Enter api secret"/>
+                    placeholder="Enter api secret" />
             </div>
             <div className="w-full textarea h-80 lg:h-125 lg:w-[80%] flex self-center justify-center items-center">
                 {!frontendImage && (
                     <div className="flex flex-col gap-2 items-center cursor-pointer"
-                         onClick={() => imageRef.current?.click()}>
-                        <input type="file" accept="image/*" hidden ref={imageRef} onChange={handleImage}/>
-                        <Upload/>
+                        onClick={() => imageRef.current?.click()}>
+                        <input type="file" accept="image/*" hidden ref={imageRef} onChange={handleImage} />
+                        <Upload />
                         <p>Upload Image</p>
                     </div>
                 )}
                 {frontendImage && (
-                    <Image src={frontendImage} className="w-full h-full" alt="User image" width={100} height={100}/>
+                    <Image src={frontendImage} className="w-full h-full" alt="User image" width={100} height={100} />
                 )}
             </div>
             <button className={"btn btn-outline"} onClick={handleConfigure}>Get Image URL</button>
