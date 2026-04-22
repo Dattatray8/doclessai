@@ -8,7 +8,8 @@ import Image from "next/image";
 import {useEffect, useRef, useState} from "react";
 import toast from "react-hot-toast";
 import {useDispatch, useSelector} from "react-redux"
-import UserApps from "@/components/UserApps";
+import UserApps from "@/components/profile/UserApps";
+import QuickLinks from "@/components/profile/QuickLinks";
 
 export default function Profile() {
     const data = useSelector((state: user) => state.user)
@@ -138,6 +139,7 @@ export default function Profile() {
                 </div>
             </div>
             <UserApps/>
+            <QuickLinks />
         </div>
     )
 }

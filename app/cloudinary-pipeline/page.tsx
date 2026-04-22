@@ -82,6 +82,7 @@ export default function CloudinaryPipelinePage() {
                     needed. You need a free <Link
                         href="https://cloudinary.com"
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="text-(--accent)"
                     >Cloudinary account ↗</Link>
                 </p>
