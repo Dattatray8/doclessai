@@ -300,7 +300,7 @@ body {
     }
 
     .page {
-        @apply mx-auto max-w-215 sm:px-5 px-2 pb-15 pt-2 sm:pt-9;
+        @apply max-w-280 mx-auto sm:px-5 px-2 pb-15 pt-2 sm:pt-9;
     }
 
     .page-header {
@@ -388,6 +388,62 @@ body {
     }
 
     .callout strong {
+        @apply font-bold text-(--text);
+    }
+
+    .cloudinary-pipeline-cred-card {
+        @apply mb-4 rounded-2xl border border-[#FFFFFF0F] bg-(--bg2) p-6;
+    }
+
+    .cloudinary-pipeline-card-label {
+        @apply mb-4 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-(--muted);
+    }
+
+    .cloudinary-pipeline-cred-grid {
+        @apply grid grid-cols-1 gap-2.5 sm:grid-cols-3;
+    }
+
+    .cloudinary-pipeline-input-group {
+        @apply flex flex-col gap-1.25;
+    }
+
+    .cloudinary-pipeline-input-label {
+        @apply text-[12px] font-medium text-(--muted2);
+    }
+
+    .cloudinary-pipeline-field-input {
+        @apply w-full rounded-lg border border-(--border2) bg-(--bg3) px-3.25 py-2.5 font-["Sora",sans-serif] text-[13px] text-(--text) outline-none transition-all duration-200 placeholder:text-(--muted);
+    }
+
+    .cloudinary-pipeline-field-input:focus {
+        @apply border-[#6c63ff]/50 ring-4 ring-[#6c63ff]/8;
+    }
+
+    .cloudinary-pipeline-field-input.mono {
+        @apply font-["JetBrains_Mono",monospace] text-[12px];
+    }
+
+    .cloudinary-pipeline-callout {
+        @apply my-3 flex items-start gap-2.5 rounded-[10px] px-4 py-3;
+    }
+
+    .cloudinary-pipeline-callout-info {
+        @apply border border-[#4f8bf9]/18 bg-[#4f8bf9]/[0.07];
+    }
+
+    .cloudinary-pipeline-callout-warn {
+        @apply border border-[#fbbf24]/18 bg-[#fbbf24]/[0.07];
+    }
+
+    .cloudinary-pipeline-callout-icon {
+        @apply mt-px shrink-0 text-[14px];
+    }
+
+    .cloudinary-pipeline-callout p {
+        @apply m-0 text-[13px] leading-[1.65] text-(--muted2);
+    }
+
+    .cloudinary-pipeline-callout strong {
         @apply font-bold text-(--text);
     }
 }

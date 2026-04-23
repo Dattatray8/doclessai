@@ -94,14 +94,64 @@ export default function CloudinaryPipelinePage() {
                         onClick={() => copyToClipboard(url)} />
                 </div>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <input className="input w-full" value={cloudName} onChange={(e) => setCloudName(e.target.value)}
-                    placeholder="Enter cloud name" />
-                <input className="input w-full" value={apiKey} onChange={(e) => setApiKey(e.target.value)}
-                    placeholder="Enter api key" />
-                <input className="input w-full" value={apiSecret} onChange={(e) => setApiSecret(e.target.value)}
-                    placeholder="Enter api secret" />
+
+            <div className="cloudinary-pipeline-cred-card">
+                <div className="cloudinary-pipeline-card-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    Cloudinary Credentials
+                </div>
+
+                <div className="cloudinary-pipeline-cred-grid">
+                    <div className="cloudinary-pipeline-input-group">
+                        <label className="cloudinary-pipeline-input-label">Cloud Name</label>
+                        <input
+                            className="cloudinary-pipeline-field-input"
+                            type="text"
+                            placeholder="my-cloud-name"
+                            value={cloudName} 
+                            onChange={(e) => setCloudName(e.target.value)}
+                            id="cloudName"
+                        />
+                    </div>
+
+                    <div className="cloudinary-pipeline-input-group">
+                        <label className="cloudinary-pipeline-input-label">API Key</label>
+                        <input
+                            className="cloudinary-pipeline-field-input mono"
+                            type="text"
+                            placeholder="123456789012345"
+                            value={apiKey}
+                            onChange={(e) => setApiKey(e.target.value)}
+                            id="apiKey"
+                        />
+                    </div>
+
+                    <div className="cloudinary-pipeline-input-group">
+                        <label className="cloudinary-pipeline-input-label">API Secret</label>
+                        <input
+                            className="cloudinary-pipeline-field-input mono"
+                            type="password"
+                            placeholder="••••••••••••••••••••"
+                            value={apiSecret} 
+                            onChange={(e) => setApiSecret(e.target.value)}
+                            id="apiSecret"
+                        />
+                    </div>
+                </div>
+
+                <div className="cloudinary-pipeline-callout cloudinary-pipeline-callout-warn mt-3! mb-0!">
+                    <span className="cloudinary-pipeline-callout-icon">⚠️</span>
+                    <p>
+                        <strong>Your credentials are not stored.</strong> They are only used
+                        to authenticate the upload request in your browser. Find them in
+                        your Cloudinary dashboard.
+                    </p>
+                </div>
             </div>
+            
             <div className="w-full textarea h-80 lg:h-125 lg:w-[80%] flex self-center justify-center items-center">
                 {!frontendImage && (
                     <div className="flex flex-col gap-2 items-center cursor-pointer"

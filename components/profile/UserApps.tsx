@@ -60,7 +60,7 @@ export default function UserApps() {
     }, [userId]);
 
     return (
-        <div className="flex flex-col gap-4" id="dashboard">
+        <div className="flex flex-col gap-4 mt-4" id="dashboard">
             <div className="p-2 flex justify-between items-center">
                 <p className="text-2xl font-semibold">My Apps</p>
                 <button
@@ -96,7 +96,7 @@ export default function UserApps() {
 
                         <tbody>
                             {apps.map((app, index) => (
-                                <tr key={app._id} className="hover">
+                                <tr key={app._id} className="transition-all duration-200 hover:border-(--border2) hover:bg-(--bg3)">
                                     <th>{index + 1}</th>
                                     <td className="font-medium hover:underline hover:cursor-pointer"
                                         onClick={() => router.push(`/user/${userId}/app/${app._id}`)}>{app.name}</td>
