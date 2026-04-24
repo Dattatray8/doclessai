@@ -111,7 +111,7 @@ export default function CloudinaryPipelinePage() {
                             className="cloudinary-pipeline-field-input"
                             type="text"
                             placeholder="my-cloud-name"
-                            value={cloudName} 
+                            value={cloudName}
                             onChange={(e) => setCloudName(e.target.value)}
                             id="cloudName"
                         />
@@ -135,7 +135,7 @@ export default function CloudinaryPipelinePage() {
                             className="cloudinary-pipeline-field-input mono"
                             type="password"
                             placeholder="••••••••••••••••••••"
-                            value={apiSecret} 
+                            value={apiSecret}
                             onChange={(e) => setApiSecret(e.target.value)}
                             id="apiSecret"
                         />
@@ -151,19 +151,51 @@ export default function CloudinaryPipelinePage() {
                     </p>
                 </div>
             </div>
-            
-            <div className="w-full textarea h-80 lg:h-125 lg:w-[80%] flex self-center justify-center items-center">
-                {!frontendImage && (
-                    <div className="flex flex-col gap-2 items-center cursor-pointer"
-                        onClick={() => imageRef.current?.click()}>
-                        <input type="file" accept="image/*" hidden ref={imageRef} onChange={handleImage} />
-                        <Upload />
-                        <p>Upload Image</p>
-                    </div>
-                )}
-                {frontendImage && (
-                    <Image src={frontendImage} className="w-full h-full" alt="User image" width={100} height={100} />
-                )}
+
+            <div className="cloudinary-pipeline-upload-card">
+                <div className="cloudinary-pipeline-card-label">
+                    <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                    >
+                        <polyline points="16 16 12 12 8 16" />
+                        <line x1="12" y1="12" x2="12" y2="21" />
+                        <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
+                    </svg>
+                    Upload Image
+                </div>
+                <div className="cloudinary-pipeline-upload-zone" onClick={() => imageRef.current?.click()}>
+                    <input type="file" accept="image/*" hidden ref={imageRef} onChange={handleImage} />
+                    {!frontendImage && (
+                        <div className="cloudinary-pipeline-upload-placeholder">
+                            <div className="cloudinary-pipeline-upload-icon-wrap">
+                                <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                >
+                                    <polyline points="16 16 12 12 8 16" />
+                                    <line x1="12" y1="12" x2="12" y2="21" />
+                                    <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
+                                </svg>
+                            </div>
+                            <div className="cloudinary-pipeline-upload-title">Drop image here or click to browse</div>
+                            <div className="cloudinary-pipeline-upload-hint">
+                                Drag and drop any screenshot, diagram, or feature image
+                            </div>
+                        </div>
+                    )}
+                    {frontendImage && (
+                        <Image src={frontendImage} className="w-fit max-h-70" alt="User image" width={100} height={100} />
+                    )}
+                </div>
             </div>
             <button className={"btn btn-outline"} onClick={handleConfigure}>Get Image URL</button>
         </div>
