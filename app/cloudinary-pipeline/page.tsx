@@ -150,8 +150,8 @@ export default function CloudinaryPipelinePage() {
                 <div className="cloudinary-pipeline-callout cloudinary-pipeline-callout-warn mt-3! mb-0!">
                     <span className="cloudinary-pipeline-callout-icon">⚠️</span>
                     <p>
-                        <strong>Your credentials are not stored.</strong> They are only used
-                        to authenticate the upload request in your browser. Find them in
+                        <strong>Your credentials are not stored.</strong> They are used only to
+                        authenticate this upload and are never persisted. Find them in
                         your Cloudinary dashboard.
                     </p>
                 </div>
@@ -218,7 +218,7 @@ export default function CloudinaryPipelinePage() {
                         onClick={handleConfigure}
                     >
                         {loading ? (
-                             <span className="loading loading-spinner loading-sm"></span>
+                            <span className="loading loading-spinner loading-sm"></span>
                         ) : (
                             <>
                                 <svg
