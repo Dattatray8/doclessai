@@ -11,6 +11,7 @@
   --accent2: #4f8bf9;
   --green: #3ecfa0;
   --text: #e8ecf4;
+  --red: #f87171;
   --muted: #5a6580;
   --muted2: #8594ae;
 }
@@ -97,7 +98,6 @@ body {
     .btn-primary {
         @apply inline-flex items-center gap-1.5 rounded-[9px] border-none bg-(--accent) px-5.5 py-3 font-['Sora'] text-[14px] text-white no-underline transition-all duration-200 hover:opacity-[0.87] hover:-translate-y-px active:scale-95 cursor-pointer
     }
-
 
     .btn-outline {
         @apply inline-flex items-center gap-1.5 rounded-[9px] border border-(--border2) bg-transparent px-5.5 py-3 font-['Sora'] text-[14px] text-(--text) no-underline transition-all duration-200 hover:bg-white/5 hover:border-white/20 cursor-pointer
@@ -296,5 +296,218 @@ body {
 
     .footer-links-row {
         @apply flex gap-4;
+    }
+
+    .page {
+        @apply max-w-280 mx-auto sm:px-5 px-2 pb-15 pt-2 sm:pt-9;
+    }
+
+    .page-header {
+        @apply mb-7;
+    }
+
+    .breadcrumb {
+        @apply mb-2.5 flex items-center gap-1.25 text-[12px] text-(--muted);
+    }
+
+    .breadcrumb a {
+        @apply text-(--muted2) no-underline transition-colors duration-200 hover:text-(--text);
+    }
+
+    .page-title {
+        @apply text-[28px] font-bold tracking-[-0.8px];
+    }
+
+    .page-sub {
+        @apply mt-1.5 text-[14px] leading-[1.6] text-(--muted2);
+    }
+
+    .create-app-form-card {
+        @apply mb-4 rounded-2xl border border-[#FFFFFF0F] bg-(--bg2) p-5 sm:p-7;
+    }
+
+    .create-app-section-label {
+        @apply mb-4 text-[11px] font-bold uppercase tracking-[0.12em] text-(--muted);
+    }
+
+    .create-app-input-row {
+        @apply mb-3 grid grid-cols-1 gap-3 sm:grid-cols-2;
+    }
+
+    .create-app-input-group {
+        @apply flex flex-col gap-1.5;
+    }
+
+    .create-app-input-label {
+        @apply text-[12.5px] font-medium text-(--muted2);
+    }
+
+    .create-app-input-label span.req {
+        @apply ml-0.75 text-(--red);
+    }
+
+    .create-app-field-input {
+        @apply w-full rounded-[9px] border border-(--border2) bg-(--bg3) px-3.5 py-2.75 font-["Sora",sans-serif] text-[13.5px] text-(--text) outline-none transition-all duration-200 placeholder:text-(--muted);
+    }
+
+    .create-app-field-input:focus {
+        @apply border-[#6c63ff]/50 ring-4 ring-[#6c63ff]/8;
+    }
+
+    .create-app-field-textarea {
+        @apply min-h-22.5 resize-y leading-[1.6];
+    }
+
+    .create-app-field-input.mono {
+        @apply font-["JetBrains_Mono",monospace] text-[12.5px];
+    }
+
+    .create-app-hint {
+        @apply mt-1 text-[11.5px] leading-normal text-(--muted);
+    }
+
+    .callout {
+        @apply my-3 flex items-start gap-2.5 rounded-[10px] px-4 py-3;
+    }
+
+    .callout-info {
+        @apply border border-[#4f8bf9]/18 bg-[#4f8bf9]/[0.07];
+    }
+
+    .callout-warn {
+        @apply border border-[#fbbf24]/18 bg-[#fbbf24]/[0.07];
+    }
+
+    .callout-icon {
+        @apply mt-px shrink-0 text-[14px];
+    }
+
+    .callout p {
+        @apply m-0 text-[13px] leading-[1.65] text-(--muted2);
+    }
+
+    .callout strong {
+        @apply font-bold text-(--text);
+    }
+
+    .cloudinary-pipeline-cred-card {
+        @apply mb-4 rounded-2xl border border-[#FFFFFF0F] bg-(--bg2) p-6;
+    }
+
+    .cloudinary-pipeline-card-label {
+        @apply mb-4 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-(--muted);
+    }
+
+    .cloudinary-pipeline-cred-grid {
+        @apply grid grid-cols-1 gap-2.5 sm:grid-cols-3;
+    }
+
+    .cloudinary-pipeline-input-group {
+        @apply flex flex-col gap-1.25;
+    }
+
+    .cloudinary-pipeline-input-label {
+        @apply text-[12px] font-medium text-(--muted2);
+    }
+
+    .cloudinary-pipeline-field-input {
+        @apply w-full rounded-lg border border-(--border2) bg-(--bg3) px-3.25 py-2.5 font-["Sora",sans-serif] text-[13px] text-(--text) outline-none transition-all duration-200 placeholder:text-(--muted);
+    }
+
+    .cloudinary-pipeline-field-input:focus {
+        @apply border-[#6c63ff]/50 ring-4 ring-[#6c63ff]/8;
+    }
+
+    .cloudinary-pipeline-field-input.mono {
+        @apply font-["JetBrains_Mono",monospace] text-[12px];
+    }
+
+    .cloudinary-pipeline-callout {
+        @apply my-3 flex items-start gap-2.5 rounded-[10px] px-4 py-3;
+    }
+
+    .cloudinary-pipeline-callout-info {
+        @apply border border-[#4f8bf9]/18 bg-[#4f8bf9]/[0.07];
+    }
+
+    .cloudinary-pipeline-callout-warn {
+        @apply border border-[#fbbf24]/18 bg-[#fbbf24]/[0.07];
+    }
+
+    .cloudinary-pipeline-callout-icon {
+        @apply mt-px shrink-0 text-[14px];
+    }
+
+    .cloudinary-pipeline-callout p {
+        @apply m-0 text-[13px] leading-[1.65] text-(--muted2);
+    }
+
+    .cloudinary-pipeline-callout strong {
+        @apply font-bold text-(--text);
+    }
+
+    .cloudinary-pipeline-upload-card {
+        @apply mb-4 rounded-2xl border border-[#FFFFFF0F] bg-(--bg2) p-6;
+    }
+
+    .cloudinary-pipeline-upload-zone {
+        @apply relative flex min-h-65 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-(--border2) transition-all duration-200;
+    }
+
+    .cloudinary-pipeline-upload-zone:hover,
+    .cloudinary-pipeline-upload-zone.dragover {
+        @apply border-[#6c63ff]/50 bg-[#6c63ff]/4;
+    }
+
+    .cloudinary-pipeline-upload-zone.has-image {
+        @apply border-solid border-[#FFFFFF0F];
+    }
+
+    .cloudinary-pipeline-upload-placeholder {
+        @apply pointer-events-none flex flex-col items-center gap-3;
+    }
+
+    .cloudinary-pipeline-upload-icon-wrap {
+        @apply flex h-14 w-14 items-center justify-center rounded-xl border border-[#6c63ff]/20 bg-[#6c63ff]/10;
+    }
+
+    .cloudinary-pipeline-upload-icon-wrap svg {
+        @apply text-(--accent);
+    }
+
+    .cloudinary-pipeline-upload-title {
+        @apply text-sm font-semibold text-(--text) text-center;
+    }
+
+    .cloudinary-pipeline-upload-hint {
+        @apply text-center text-[12.5px] text-(--muted2);
+    }
+
+    .cloudinary-pipeline-preview-overlay {
+        @apply absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-200;
+    }
+
+    .cloudinary-pipeline-upload-zone:hover .cloudinary-pipeline-preview-overlay {
+        @apply opacity-100;
+    }
+
+    .cloudinary-pipeline-preview-change {
+        @apply pointer-events-none text-sm font-semibold text-white;
+    }
+
+    .cloudinary-pipeline-upload-action-row {
+        @apply mt-3 flex flex-wrap items-center justify-between gap-2.5;
+    }
+
+    .cloudinary-pipeline-file-info {
+        @apply flex items-center gap-2 text-[13px] text-(--muted2);
+    }
+
+    code.inline {
+        @apply rounded border border-[#6c63ff]/20 bg-[#6c63ff]/10 px-1.25 py-px font-["JetBrains_Mono",monospace] text-[11.5px] text-[#a29dff];
+    }
+
+    .cloudinary-pipeline-result-label {
+        @apply mb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-(--muted);
     }
 }

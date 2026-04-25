@@ -8,7 +8,8 @@ import Image from "next/image";
 import {useEffect, useRef, useState} from "react";
 import toast from "react-hot-toast";
 import {useDispatch, useSelector} from "react-redux"
-import UserApps from "@/components/UserApps";
+import UserApps from "@/components/profile/UserApps";
+import QuickLinks from "@/components/profile/QuickLinks";
 
 export default function Profile() {
     const data = useSelector((state: user) => state.user)
@@ -60,7 +61,7 @@ export default function Profile() {
     }
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="page">
             <div className="card bg-base-300">
                 <div className="card-body" id="profile">
                     <Icon className="absolute right-6 cursor-pointer hover:text-accent transition-all"
@@ -138,6 +139,7 @@ export default function Profile() {
                 </div>
             </div>
             <UserApps/>
+            <QuickLinks />
         </div>
     )
 }

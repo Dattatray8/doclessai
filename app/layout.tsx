@@ -31,8 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         cz-shortcut-listen="true"
-        data-theme="dark"
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <ClientProvider>
             <SessionHydrator />

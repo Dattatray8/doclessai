@@ -1,13 +1,14 @@
 'use client'
 
-import {useEffect, useState} from "react";
-import {Editor} from "@monaco-editor/react";
-import {useSelector} from "react-redux";
+import { useEffect, useState } from "react";
+import { Editor } from "@monaco-editor/react";
+import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
-import {user} from "@/types/redux.types";
-import {useRouter} from "next/navigation";
-import {DEFAULT_FEATURES_JSON} from "@/types/global.types";
+import { user } from "@/types/redux.types";
+import { useRouter } from "next/navigation";
+import { DEFAULT_FEATURES_JSON } from "@/types/global.types";
+import Link from "next/link";
 
 export default function CreateApp() {
     const data = useSelector((state: user) => state.user);
@@ -73,7 +74,7 @@ export default function CreateApp() {
         try {
             const res = await fetch("/api/v1/app", {
                 method: "POST",
-                headers: {"Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
                 credentials: "include",
                 body: JSON.stringify({
                     name,
@@ -92,9 +93,9 @@ export default function CreateApp() {
             let buffer = "";
 
             while (true) {
-                const {value, done} = await reader.read();
+                const { value, done } = await reader.read();
                 if (done) break;
-                buffer += decoder.decode(value, {stream: true});
+                buffer += decoder.decode(value, { stream: true });
                 const parts = buffer.split("\n\n");
                 buffer = parts.pop() || "";
                 for (const part of parts) {
@@ -128,7 +129,19 @@ export default function CreateApp() {
     }, [finalResult]);
 
     return (
-        <div className="card bg-base-300">
+        <div className="page">
+            <div className="page-header">
+                <div className="breadcrumb">
+                    <Link href="/user">Dashboard</Link>
+                    <span>›</span>
+                    <span className="text-(--text)">Create App</span>
+                </div>
+                <div className="page-title">Create a new app</div>
+                <div className="page-sub">
+                    Your app&apos;s features teach the AI what your application does. Users
+                    will chat with the assistant to get answers about these features.
+                </div>
+            </div>
             <dialog id="progress_modal" className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg mb-2">
@@ -197,42 +210,62 @@ export default function CreateApp() {
                 </div>
             </dialog>
 
-            <div className="card-body" id="create-app">
-                <div className="text-2xl font-semibold">Create App</div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <input
-                        type="text"
-                        className="input w-full"
-                        placeholder="App name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-
-                    <input
-                        type="email"
-                        className="input w-full"
-                        placeholder="Contact email"
-                        value={contactEmail}
-                        onChange={(e) => setContactEmail(e.target.value)}
-                    />
+            <div className="create-app-form-card" id="create-app">
+                <div className="create-app-section-label">App Details</div>
+                <div className="create-app-input-row">
+                    <div className="create-app-input-group">
+                        <label className="create-app-input-label">App Name <span className="req">*</span></label>
+                        <input
+                            type="text"
+                            className="create-app-field-input"
+                            placeholder="My SaaS App"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div className="create-app-input-group">
+                        <label className="create-app-input-label">Contact email <span className="req">*</span></label>
+                        <input
+                            type="email"
+                            className="create-app-field-input"
+                            placeholder="you@example.com"
+                            value={contactEmail}
+                            onChange={(e) => setContactEmail(e.target.value)}
+                        />
+                    </div>
                 </div>
 
-                <textarea
-                    rows={4}
-                    className="textarea w-full mt-4"
-                    placeholder="App description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-
-                <input
-                    type="password"
-                    className="input w-full mt-4"
-                    placeholder="Gemini API Key"
-                    value={geminiKey}
-                    onChange={(e) => setGeminiKey(e.target.value)}
-                />
+                <div className="create-app-input-group mb-3">
+                    <label className="create-app-input-label">App Description <span className="req">*</span></label>
+                    <textarea
+                        rows={4}
+                        className="create-app-field-textarea create-app-field-input"
+                        placeholder="Describe what your app does overall — this helps the AI understand the context of all features."
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </div>
+                <div className="create-app-input-group">
+                    <label className="create-app-input-label"
+                    >Gemini API Key <span className="req">*</span></label
+                    >
+                    <input
+                        type="password"
+                        className="create-app-field-input mono"
+                        placeholder="AIza••••••••••••••••••••••••••••••••••••••"
+                        value={geminiKey}
+                        onChange={(e) => setGeminiKey(e.target.value)}
+                    />
+                    <div className="create-app-hint">
+                        Your Gemini API key powers the AI responses for this app. Get one at
+                        <Link
+                            href="https://aistudio.google.com/app/apikey"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            className="text-(--accent)"
+                        > aistudio.google.com ↗</Link>
+                    </div>
+                </div>
 
                 <div className="mt-5">
                     <div className="flex items-center justify-between mb-2">
