@@ -16,6 +16,8 @@ export default function CloudinaryPipelinePage() {
     const imageRef = useRef<HTMLInputElement>(null);
     const [url, setUrl] = useState<string>('');
     const [fileMeta, setFileMeta] = useState<{ name: string; size: string } | null>(null);
+    const [uploadHistory, setUploadHistory] = useState<string[]>([]);
+    const [loading, setLoading] = useState(false);
 
     const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files
@@ -48,7 +50,7 @@ export default function CloudinaryPipelinePage() {
             toast.error("Please select an image");
             return;
         }
-
+        setLoading(true)
         const res = await cloudinaryPipeline(
             cloudName,
             apiKey,
@@ -61,8 +63,9 @@ export default function CloudinaryPipelinePage() {
         }
 
         setUrl(res.url)
-        setFrontendImage("")
         setBackendImage(null)
+        setUploadHistory((prev) => [res.url, ...prev])
+        setLoading(false)
     }
 
     return (
@@ -191,6 +194,7 @@ export default function CloudinaryPipelinePage() {
                             <div className="cloudinary-pipeline-upload-hint">
                                 Drag and drop any screenshot, diagram, or feature image
                             </div>
+                            <div className="text-[11px] text-(--muted)">Max 10MB</div>
                         </div>
                     )}
                     {frontendImage && (
@@ -212,19 +216,25 @@ export default function CloudinaryPipelinePage() {
                         id="uploadBtn"
                         onClick={handleConfigure}
                     >
-                        <svg
-                            width="15"
-                            height="15"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                        >
-                            <polyline points="16 16 12 12 8 16" />
-                            <line x1="12" y1="12" x2="12" y2="21" />
-                            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
-                        </svg>
-                        Get Image URL
+                        {loading ? (
+                             <span className="loading loading-spinner loading-sm"></span>
+                        ) : (
+                            <>
+                                <svg
+                                    width="15"
+                                    height="15"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                >
+                                    <polyline points="16 16 12 12 8 16" />
+                                    <line x1="12" y1="12" x2="12" y2="21" />
+                                    <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
+                                </svg>
+                                Get Image URL
+                            </>
+                        )}
                     </button>
                 </div>
             </div>
@@ -255,6 +265,38 @@ export default function CloudinaryPipelinePage() {
                     </div>
                 </div>
             )}
+
+            <div className="cloudinary-pipeline-upload-card">
+                <div className="cloudinary-pipeline-card-label mb-4">
+                    <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                    >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    Upload History (this session)
+                </div>
+                {uploadHistory.length > 0 ? (
+                    <div className="flex flex-col gap-4">
+                        {uploadHistory.map((url, idx) => (
+                            <div className={"cloudinary-pipeline-field-input w-full flex justify-between"} key={idx}>
+                                <p className={"truncate max-w-44 sm:max-w-full text-(--accent)"}>{url}</p>
+                                <Copy className={"w-4 h-4 cursor-pointer opacity-80 hover:opacity-100"}
+                                    onClick={() => copyToClipboard(url)} />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center text-(--muted) p-8">
+                        No uploads yet this session. Upload an image above to get started.
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
