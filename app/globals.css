@@ -450,10 +450,6 @@ body {
         @apply mb-4 rounded-2xl border border-[#FFFFFF0F] bg-(--bg2) p-6;
     }
 
-    .cloudinary-pipeline-upload-card {
-        @apply mb-4 rounded-2xl border border-[#FFFFFF0F] bg-(--bg2) p-6;
-    }
-
     .cloudinary-pipeline-upload-zone {
         @apply relative flex min-h-65 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-(--border2) transition-all duration-200;
     }
@@ -505,5 +501,13 @@ body {
 
     .cloudinary-pipeline-file-info {
         @apply flex items-center gap-2 text-[13px] text-(--muted2);
+    }
+
+    code .inline {
+        @apply rounded border border-[#6c63ff]/20 bg-[#6c63ff]/10 px-1.25 py-px font-["JetBrains_Mono",monospace] text-[11.5px] text-[#a29dff];
+    }
+
+    .cloudinary-pipeline-result-label {
+        @apply mb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-(--muted);
     }
 }

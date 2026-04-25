@@ -95,13 +95,6 @@ export default function CloudinaryPipelinePage() {
                     >Cloudinary account ↗</Link>
                 </p>
             </div>
-            {url && (
-                <div className={"input w-full flex justify-between"}>
-                    <p className={"truncate max-w-56 sm:max-w-full"}>{url}</p>
-                    <Copy className={"w-4 h-4 cursor-pointer opacity-80 hover:opacity-100"}
-                        onClick={() => copyToClipboard(url)} />
-                </div>
-            )}
 
             <div className="cloudinary-pipeline-cred-card">
                 <div className="cloudinary-pipeline-card-label">
@@ -235,7 +228,33 @@ export default function CloudinaryPipelinePage() {
                     </button>
                 </div>
             </div>
-            <button className={"btn btn-outline"} onClick={handleConfigure}>Get Image URL</button>
+
+            {url && (
+                <div className="cloudinary-pipeline-upload-card">
+                    <div className="flex items-center mb-4 gap-2.5">
+                        <div className="cloudinary-pipeline-card-label mb-0">Image Uploaded</div>
+                        <span className="badge badge-success badge-outline rounded-full text-[7px] sm:text-sm">✓ Public URL ready</span>
+                    </div>
+                    <div className="cloudinary-pipeline-result-label">
+                        Public URL — paste this into your feature&apos;s
+                        <code className="inline">image</code> field
+                    </div>
+                    <div className={"cloudinary-pipeline-field-input w-full flex justify-between"}>
+                        <p className={"truncate max-w-56 sm:max-w-full text-(--accent)"}>{url}</p>
+                        <Copy className={"w-4 h-4 cursor-pointer opacity-80 hover:opacity-100"}
+                            onClick={() => copyToClipboard(url)} />
+                    </div>
+                    <Image src={frontendImage} className="w-full object-cover mt-4 rounded-xl max-h-70" alt="User image" width={100} height={100} />
+                    <div className="mt-3 text-[12.5px] text-(--muted2)">
+                        Now paste this URL into the <code className="inline">image</code> field of
+                        your feature in the
+                        <Link
+                            href={"/create-app"}
+                            className="text-(--accent)"> Create App </Link>
+                        form or edit your existing app.
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
