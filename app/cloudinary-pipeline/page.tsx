@@ -59,6 +59,7 @@ export default function CloudinaryPipelinePage() {
         );
         if (!res?.success) {
             toast.error(res?.message || "Something went wrong");
+            setLoading(false)
             return;
         }
 
