@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { cloudinaryPipeline } from "@/helpers/server/cloudinary";
 import toast from "react-hot-toast";
-import { Copy, Upload } from "lucide-react";
+import { Copy } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,6 +15,7 @@ export default function CloudinaryPipelinePage() {
     const [backendImage, setBackendImage] = useState<File | null>();
     const imageRef = useRef<HTMLInputElement>(null);
     const [url, setUrl] = useState<string>('');
+    const [fileMeta, setFileMeta] = useState<{ name: string; size: string } | null>(null);
 
     const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files
@@ -23,6 +24,7 @@ export default function CloudinaryPipelinePage() {
         }
         setBackendImage(files[0])
         setFrontendImage(URL.createObjectURL(files[0]))
+        setFileMeta({ name: files[0].name, size: (files[0].size / 1024 / 1024).toFixed(2) + " MB" })
     }
 
     const copyToClipboard = async (text: string) => {
@@ -36,6 +38,12 @@ export default function CloudinaryPipelinePage() {
     };
 
     const handleConfigure = async () => {
+
+        if (!cloudName || !apiKey || !apiSecret) {
+            toast.error("Please fill in all Cloudinary credentials");
+            return;
+        }
+
         if (!backendImage) {
             toast.error("Please select an image");
             return;
@@ -193,8 +201,38 @@ export default function CloudinaryPipelinePage() {
                         </div>
                     )}
                     {frontendImage && (
-                        <Image src={frontendImage} className="w-fit max-h-70" alt="User image" width={100} height={100} />
+                        <>
+                            <div className="cloudinary-pipeline-preview-overlay">
+                                <div className="cloudinary-pipeline-preview-change">Click to change image</div>
+                            </div>
+                            <Image src={frontendImage} className="w-fit max-h-70" alt="User image" width={100} height={100} />
+                        </>
                     )}
+
+                </div>
+                <div className="cloudinary-pipeline-upload-action-row">
+                    <div className="cloudinary-pipeline-file-info" id="fileInfo">
+                        <span className="text-sm text-(--muted)">{fileMeta ? `${fileMeta.name} (${fileMeta.size})` : "No file selected"}</span>
+                    </div>
+                    <button
+                        className="btn-primary"
+                        id="uploadBtn"
+                        onClick={handleConfigure}
+                    >
+                        <svg
+                            width="15"
+                            height="15"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                        >
+                            <polyline points="16 16 12 12 8 16" />
+                            <line x1="12" y1="12" x2="12" y2="21" />
+                            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
+                        </svg>
+                        Get Image URL
+                    </button>
                 </div>
             </div>
             <button className={"btn btn-outline"} onClick={handleConfigure}>Get Image URL</button>

@@ -99,7 +99,6 @@ body {
         @apply inline-flex items-center gap-1.5 rounded-[9px] border-none bg-(--accent) px-5.5 py-3 font-['Sora'] text-[14px] text-white no-underline transition-all duration-200 hover:opacity-[0.87] hover:-translate-y-px active:scale-95 cursor-pointer
     }
 
-
     .btn-outline {
         @apply inline-flex items-center gap-1.5 rounded-[9px] border border-(--border2) bg-transparent px-5.5 py-3 font-['Sora'] text-[14px] text-(--text) no-underline transition-all duration-200 hover:bg-white/5 hover:border-white/20 cursor-pointer
     }
@@ -486,5 +485,25 @@ body {
 
     .cloudinary-pipeline-upload-hint {
         @apply text-center text-[12.5px] text-(--muted2);
+    }
+
+    .cloudinary-pipeline-preview-overlay {
+        @apply absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-200;
+    }
+
+    .cloudinary-pipeline-upload-zone:hover .cloudinary-pipeline-preview-overlay {
+        @apply opacity-100;
+    }
+
+    .cloudinary-pipeline-preview-change {
+        @apply pointer-events-none text-sm font-semibold text-white;
+    }
+
+    .cloudinary-pipeline-upload-action-row {
+        @apply mt-3 flex flex-wrap items-center justify-between gap-2.5;
+    }
+
+    .cloudinary-pipeline-file-info {
+        @apply flex items-center gap-2 text-[13px] text-(--muted2);
     }
 }
