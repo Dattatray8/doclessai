@@ -260,6 +260,7 @@ export default function CreateApp() {
                         Your Gemini API key powers the AI responses for this app. Get one at
                         <Link
                             href="https://aistudio.google.com/app/apikey"
+                            rel="noopener noreferrer"
                             target="_blank"
                             className="text-(--accent)"
                         > aistudio.google.com ↗</Link>

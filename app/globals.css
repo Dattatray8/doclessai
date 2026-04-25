@@ -503,7 +503,7 @@ body {
         @apply flex items-center gap-2 text-[13px] text-(--muted2);
     }
 
-    code .inline {
+    code.inline {
         @apply rounded border border-[#6c63ff]/20 bg-[#6c63ff]/10 px-1.25 py-px font-["JetBrains_Mono",monospace] text-[11.5px] text-[#a29dff];
     }
 
