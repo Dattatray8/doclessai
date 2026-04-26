@@ -12,6 +12,7 @@ export default function CloudinaryPipelinePage() {
     const [apiKey, setApiKey] = useState<string>('');
     const [apiSecret, setApiSecret] = useState<string>('');
     const [frontendImage, setFrontendImage] = useState("");
+    const [imagePreview, setImagePreview] = useState("");
     const [backendImage, setBackendImage] = useState<File | null>();
     const imageRef = useRef<HTMLInputElement>(null);
     const [url, setUrl] = useState<string>('');
@@ -64,6 +65,7 @@ export default function CloudinaryPipelinePage() {
         }
 
         setUrl(res.url)
+        setImagePreview(frontendImage)
         setBackendImage(null)
         setUploadHistory((prev) => [res.url, ...prev])
         setLoading(false)
@@ -255,7 +257,7 @@ export default function CloudinaryPipelinePage() {
                         <Copy className={"w-4 h-4 cursor-pointer opacity-80 hover:opacity-100"}
                             onClick={() => copyToClipboard(url)} />
                     </div>
-                    <Image src={frontendImage} className="w-full object-cover mt-4 rounded-xl max-h-70" alt="User image" width={100} height={100} />
+                    <Image src={imagePreview} className="w-full object-cover mt-4 rounded-xl max-h-70" alt="User image" width={100} height={100} />
                     <div className="mt-3 text-[12.5px] text-(--muted2)">
                         Now paste this URL into the <code className="inline">image</code> field of
                         your feature in the

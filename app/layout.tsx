@@ -30,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        data-theme="dark"
         cz-shortcut-listen="true"
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
